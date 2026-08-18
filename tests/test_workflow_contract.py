@@ -107,6 +107,7 @@ class WorkflowContractTests(unittest.TestCase):
         ppi = ppi_fsf.read_text(encoding="utf-8")
         self.assertNotIn("PHYS", ppi)
         self.assertIn("ts_task-ugr_ses-01_mask-pTPJ_run-1.txt", ppi)
+        self.assertIn("set fmri(convolve11) 3", ppi)
 
     def test_absent_miss_uses_empty_shape_and_no_stale_file(self) -> None:
         self.prepare_run("2", misses=False)
@@ -121,6 +122,25 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertFalse(
             (self.fsl / "EVfiles" / "sub-99999" / "ses-01" / "ugr" / "model-3" / "run-2_missed_trial.txt").exists()
         )
+
+    def test_ev_batch_dry_run_validates_without_writing(self) -> None:
+        events = self.prepare_run("1", misses=True)
+        shutil.rmtree(self.fsl / "EVfiles")
+        manifest = self.base / "manifest.tsv"
+        manifest.write_text("subject\tsession\trun\n99999\t01\t1\n", encoding="utf-8")
+
+        result = self.run_script(
+            "code/run_gen3colfiles.sh",
+            "--manifest",
+            str(manifest),
+            "--jobs",
+            "2",
+            "--dry-run",
+        )
+
+        self.assertIn("Model-3 EVs would-write", result.stdout)
+        self.assertFalse(self.fsl.joinpath("EVfiles").exists())
+        self.assertTrue(events.is_file())
 
     def test_l1_names_are_exactly_the_l2_inputs(self) -> None:
         subject_dir = self.fsl / "sub-99999" / "ses-01"

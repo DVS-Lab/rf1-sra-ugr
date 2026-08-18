@@ -58,7 +58,7 @@ All active analysis code is model 3, session-aware, and BIDS/derivatives-only.
 - **Typical command:** `bash code/run_gen3colfiles.sh --manifest logs/runlists/L1-ready.tsv --jobs 16 --log-dir logs/EV-current`.
 - **Called by / calls:** Calls `gen_model3_evs.py`.
 - **Scientific role:** Applies the same validated model transformation to every selected run.
-- **Important assumptions:** `--dry-run` performs full input/model validation without writing.
+- **Important assumptions:** `--dry-run` performs full input/model validation without writing. It may therefore report canonical-events problems; it is not only a command preview.
 
 ## `ugr_qc.py`
 

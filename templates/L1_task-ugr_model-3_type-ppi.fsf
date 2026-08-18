@@ -1371,7 +1371,7 @@ set fmri(shape11) SHAPE_EV
 # 5 : Sine basis functions
 # 6 : FIR basis functions
 # 8 : Alternate Double-Gamma
-set fmri(convolve11) 0
+set fmri(convolve11) 3
 
 # Convolve phase (EV 11)
 set fmri(convolve_phase11) 0

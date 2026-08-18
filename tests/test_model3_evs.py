@@ -72,6 +72,31 @@ class Model3EVTests(unittest.TestCase):
         self.assertEqual(new_duration, historical_duration + 0.5)
         self.assertEqual(outputs["rt_pmod"][0], (3.0, 0.0, -0.75))
 
+    def test_logged_response_onset_need_not_equal_decision_onset_plus_rt(self) -> None:
+        rows = read_fixture()
+        trial = [row for row in rows if row["trial_id"] == "1"]
+        decision = next(row for row in trial if row["trial_type"] == "decision")
+        choice = next(row for row in trial if row["trial_type"] == "choice_feedback")
+        decision["duration"] = "1.2"
+        decision["response_time"] = "1.2"
+        choice["response_time"] = "1.2"
+
+        collapsed = collapse_trials(rows)
+
+        first = next(item for item in collapsed if item.trial_id == "1")
+        self.assertEqual(first.response_onset, 3.0)
+        self.assertEqual(first.response_time, 1.2)
+        self.assertEqual(first.broad_duration, 4.0)
+
+    def test_decision_duration_must_agree_with_response_time(self) -> None:
+        self.assert_invalid(
+            lambda rows: next(
+                row
+                for row in rows
+                if row["trial_id"] == "1" and row["trial_type"] == "decision"
+            ).__setitem__("duration", "1.2")
+        )
+
     def test_atomic_rerun_removes_stale_miss_file(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

@@ -65,10 +65,10 @@ PPI differences between norms HPC and betrayal:
 - Featwatcher, dwell/TE, total voxels, randomise GUI field, numeric formatting:
   **DISPLAY/FEAT GUI ONLY** or **IMPLEMENTATION ONLY**;
 - `convolve11` equals 3 in norms HPC and 0 in betrayal:
-  **SCIENTIFIC MODEL DIFFERENCE**. The task explicitly prioritizes betrayal's
-  newer seed-PPI implementation, so the betrayal value is retained and the
-  discrepancy is documented in `templates/README.md` rather than silently
-  blended.
+  **SCIENTIFIC MODEL DIFFERENCE**. The authoritative template resolves this to
+  3: when present, the missed-trial EV is a task epoch and is convolved like the
+  other task regressors. When absent, the rendered EV uses empty shape 10.
+  Other PPI construction and contrasts continue to follow betrayal.
 
 L2 activation and PPI source templates are byte-identical.
 

@@ -50,11 +50,16 @@ fi
 echo "PASS: model 3 is the only active model"
 
 act_template="$PROJECT_ROOT/templates/L1_task-ugr_model-3_type-act.fsf"
+ppi_template="$PROJECT_ROOT/templates/L1_task-ugr_model-3_type-ppi.fsf"
 [[ "$(grep -c '^set fmri(evtitle[0-9]\+)' "$act_template")" -eq 11 ]]
 [[ "$(grep -c '^set fmri(conname_real\.[0-9]\+)' "$act_template")" -eq 17 ]]
 [[ "$(grep -c '^set fmri(custom[0-9]\+)' "$act_template")" -eq 11 ]]
 [[ "$(grep -c '^set fmri(ortho[0-9]\+\.[0-9]\+) 1' "$act_template" || true)" -eq 0 ]]
 echo "PASS: activation template has 11 EVs, 17 contrasts, and no FEAT orthogonalization"
+
+[[ "$(grep -c '^set fmri(convolve11) 3' "$act_template")" -eq 1 ]]
+[[ "$(grep -c '^set fmri(convolve11) 3' "$ppi_template")" -eq 1 ]]
+echo "PASS: missed-trial EV uses task convolution in activation and PPI templates"
 
 cd "$PROJECT_ROOT"
 python3 -m unittest discover -s tests -p 'test_*.py' -v

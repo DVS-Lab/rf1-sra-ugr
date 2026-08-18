@@ -46,6 +46,7 @@ CONDITIONS = (
     ("social", 32, "social_high"),
     ("social", 16, "social_low"),
 )
+TIME_TOLERANCE = 1e-5
 
 
 class Model3Error(ValueError):
@@ -184,7 +185,13 @@ def collapse_trials(rows: Iterable[dict[str, str]]) -> list[Trial]:
             if unexpected:
                 raise Model3Error(f"trial {trial_id}: unexpected missed-trial phase(s): {unexpected}")
             missed_onset, missed_end = _bounds(missed_rows[0], trial_id)
-            if not (partner_onset <= partner_end <= endowment_onset <= endowment_end <= missed_onset < missed_end):
+            if not (
+                partner_onset <= partner_end
+                and partner_end <= endowment_onset + TIME_TOLERANCE
+                and endowment_onset <= endowment_end
+                and endowment_end <= missed_onset + TIME_TOLERANCE
+                and missed_onset < missed_end
+            ):
                 raise Model3Error(f"trial {trial_id}: temporally inconsistent missed-trial phases")
             trials.append(
                 Trial(
@@ -210,17 +217,25 @@ def collapse_trials(rows: Iterable[dict[str, str]]) -> list[Trial]:
         decision_onset, decision_end = _bounds(decision, trial_id)
         choice_onset, choice_end = _bounds(choice, trial_id)
         if not (
-            partner_onset <= partner_end <= endowment_onset <= endowment_end <= decision_onset
-            and decision_onset <= decision_end <= choice_onset + 1e-6
+            partner_onset <= partner_end
+            and partner_end <= endowment_onset + TIME_TOLERANCE
+            and endowment_onset <= endowment_end
+            and endowment_end <= decision_onset + TIME_TOLERANCE
+            and decision_onset <= choice_onset + TIME_TOLERANCE
             and choice_onset < choice_end
         ):
             raise Model3Error(f"trial {trial_id}: temporally inconsistent responded-trial phases")
         rt_decision = _number(decision["response_time"], f"trial {trial_id} decision response_time")
         rt_choice = _number(choice["response_time"], f"trial {trial_id} choice_feedback response_time")
-        if not math.isclose(rt_decision, rt_choice, rel_tol=0, abs_tol=1e-6):
+        if not math.isclose(rt_decision, rt_choice, rel_tol=0, abs_tol=TIME_TOLERANCE):
             raise Model3Error(f"trial {trial_id}: contradictory response_time across response phases")
-        if not math.isclose(decision_end, choice_onset, rel_tol=0, abs_tol=1e-5):
-            raise Model3Error(f"trial {trial_id}: response_time does not end at choice_feedback onset")
+        if not math.isclose(
+            decision_end - decision_onset,
+            rt_decision,
+            rel_tol=0,
+            abs_tol=TIME_TOLERANCE,
+        ):
+            raise Model3Error(f"trial {trial_id}: decision duration disagrees with response_time")
         offer = _number(trial_rows[0]["offer"], f"trial {trial_id} offer")
         trials.append(
             Trial(

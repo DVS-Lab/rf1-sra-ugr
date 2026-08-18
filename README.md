@@ -56,6 +56,12 @@ git pull --ff-only origin main
 export RF1_SRA_UPSTREAM_ROOT=/ZPOOL/data/projects/rf1-sra-linux2
 export FSL_DERIVATIVES_ROOT="${PWD}/derivatives/fsl"
 
+if command -v make >/dev/null 2>&1; then
+  make test
+else
+  bash code/validate_workflow.sh
+fi
+
 mkdir -p logs/runlists logs/EV-current logs/L1-current
 
 python3 code/build_L1_manifest.py \
@@ -141,5 +147,9 @@ explicitly with `--sessions 01,02`.
 Run the local validation suite with:
 
 ```bash
-make test
+if command -v make >/dev/null 2>&1; then
+  make test
+else
+  bash code/validate_workflow.sh
+fi
 ```

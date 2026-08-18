@@ -76,12 +76,14 @@ interaction EVs for 23 original EVs and 18 contrasts. Contrast 18 is `phys`.
 Seeds are selected by `masks/seed-<name>.nii.gz`; activation must run first.
 
 The current norms HPC PPI template is not byte-identical. Most differences are
-GUI/environment fields or numeric formatting. The meaningful difference is
-`convolve11`: norms HPC uses 3 while betrayal uses 0 for the miss EV. This
-repository follows the explicitly prioritized betrayal PPI implementation and
-records the discrepancy here for provenance; the contrast vectors and PPI
-interaction construction otherwise agree. Two betrayal EV titles omit a
-`ppi_` display prefix, but the corresponding interaction definitions and
+GUI/environment fields or numeric formatting. The meaningful source
+difference was `convolve11`: norms HPC used 3 while betrayal used 0. The
+authoritative template uses 3 because a populated missed-trial file represents
+a task epoch and must receive the same double-gamma convolution as the other
+task regressors. When no miss file exists, `L1stats.sh` changes EV 11 to empty
+shape 10, so this setting does not create a regressor. The contrast vectors and
+PPI interaction construction otherwise follow betrayal. Two betrayal EV titles
+omit a `ppi_` display prefix, but the corresponding interaction definitions and
 contrast positions are unchanged.
 
 ## L2
