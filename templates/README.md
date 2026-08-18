@@ -3,6 +3,8 @@
 Only model 3 is active. Templates retain the established TR (1.615 seconds),
 5-mm smoothing, FILM prewhitening, filtering choices, HRF settings, thresholds,
 and already-normalized-input registration treatment from the source workflows.
+The GUI FEAT progress watcher is disabled in every active template so batch
+execution never requires X11.
 
 ## L1 activation: 11 EVs
 

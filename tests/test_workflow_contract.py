@@ -96,6 +96,7 @@ class WorkflowContractTests(unittest.TestCase):
         act_fsf = subject_dir / "L1_sub-99999_task-ugr_ses-01_model-3_type-act_run-1.fsf"
         rendered = act_fsf.read_text(encoding="utf-8")
         self.assertIn("set fmri(shape11) 3", rendered)
+        self.assertIn("set fmri(featwatcher_yn) 0", rendered)
         for placeholder in ("OUTPUT", "DATA", "EVDIR", "MISSED_TRIAL", "SHAPE_EV", "CONFOUNDEVS", "NVOLUMES"):
             self.assertNotIn(placeholder, rendered)
 
@@ -108,6 +109,7 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertNotIn("PHYS", ppi)
         self.assertIn("ts_task-ugr_ses-01_mask-pTPJ_run-1.txt", ppi)
         self.assertIn("set fmri(convolve11) 3", ppi)
+        self.assertIn("set fmri(featwatcher_yn) 0", ppi)
 
     def test_absent_miss_uses_empty_shape_and_no_stale_file(self) -> None:
         self.prepare_run("2", misses=False)
