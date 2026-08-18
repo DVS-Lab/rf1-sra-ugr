@@ -119,6 +119,11 @@ bash code/run_L2stats.sh \
   --type act --jobs 20 --dry-run
 ```
 
+`L2stats.sh` defaults `FSLSUB_PARALLEL=1`. This prevents the local `fsl_sub`
+shell backend from creating machine-wide worker pools inside every FEAT job,
+so `run_L2stats.sh --jobs` remains the primary L2 concurrency control. An
+explicitly exported `FSLSUB_PARALLEL` value overrides the default.
+
 Use `code/run_logged.sh` around important production commands when a compact,
 Git-trackable run record is desired. Generated imaging data and raw logs remain
 untracked.

@@ -40,6 +40,7 @@ class WorkflowContractTests(unittest.TestCase):
         for command in ("fslnvols", "fslmeants"):
             (self.bin / command).chmod(0o755)
         self.env = os.environ.copy()
+        self.env.pop("FSLSUB_PARALLEL", None)
         self.env.update(
             {
                 "BIDS_ROOT": str(self.bids),
@@ -152,7 +153,8 @@ class WorkflowContractTests(unittest.TestCase):
             feat.mkdir(parents=True)
             (feat / "cluster_mask_zstat1.nii.gz").write_bytes(b"fake")
             expected.append(feat)
-        self.run_script("code/L2stats.sh", "99999", "act", "--session", "01", "--render-only")
+        result = self.run_script("code/L2stats.sh", "99999", "act", "--session", "01", "--render-only")
+        self.assertIn("FSLSUB_PARALLEL: 1", result.stdout)
         rendered = (
             subject_dir / "L2_sub-99999_task-ugr_ses-01_model-3_type-act.fsf"
         ).read_text(encoding="utf-8")

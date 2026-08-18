@@ -4,6 +4,12 @@
 
 set -euo pipefail
 
+# The local fsl_sub shell backend otherwise gives each FEAT subprocess access
+# to every CPU and may build a full-size worker pool for one-line command
+# files. Keep run_L2stats.sh --jobs as the primary concurrency control while
+# allowing an intentional environment override.
+export FSLSUB_PARALLEL="${FSLSUB_PARALLEL:-1}"
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 # shellcheck source=project_config.sh
 source "${SCRIPT_DIR}/project_config.sh"
@@ -60,8 +66,8 @@ subject_output="${FSL_DERIVATIVES_ROOT}/sub-${sub}/ses-${session}"
 rendered="${subject_output}/L2_sub-${sub}_task-ugr_ses-${session}_model-3_type-${type}.fsf"
 [[ -f "$template" ]] || { echo "ERROR: FEAT template not found: $template" >&2; exit 1; }
 
-printf 'L2 plan (fixed effects across UGR runs 1 + 2)\n  run 1: %s\n  run 2: %s\n  output: %s.gfeat\n' \
-    "$input1" "$input2" "$output"
+printf 'L2 plan (fixed effects across UGR runs 1 + 2)\n  run 1: %s\n  run 2: %s\n  output: %s.gfeat\n  FSLSUB_PARALLEL: %s\n' \
+    "$input1" "$input2" "$output" "$FSLSUB_PARALLEL"
 [[ "$mode" == dry-run ]] && exit 0
 
 gfeat_dir="${output}.gfeat"
