@@ -1,0 +1,3428 @@
+
+# FEAT version number
+set fmri(version) 6.00
+
+# Are we in MELODIC?
+set fmri(inmelodic) 0
+
+# Analysis level
+# 1 : First-level analysis
+# 2 : Higher-level analysis
+set fmri(level) 2
+
+# Which stages to run
+# 0 : No first-level analysis (registration and/or group stats only)
+# 7 : Full first-level analysis
+# 1 : Pre-processing
+# 2 : Statistics
+set fmri(analysis) 2
+
+# Use relative filenames
+set fmri(relative_yn) 0
+
+# Balloon help
+set fmri(help_yn) 1
+
+# Run Featwatcher
+set fmri(featwatcher_yn) 1
+
+# Cleanup first-level standard-space images
+set fmri(sscleanup_yn) 0
+
+# Output directory
+set fmri(outputdir) "OUTPUT"
+
+# TR(s)
+set fmri(tr) 3
+
+# Total volumes
+set fmri(npts) 339
+
+# Delete volumes
+set fmri(ndelete) 0
+
+# Perfusion tag/control order
+set fmri(tagfirst) 1
+
+# Number of first-level analyses
+set fmri(multiple) 339
+
+# Higher-level input type
+# 1 : Inputs are lower-level FEAT directories
+# 2 : Inputs are cope images from FEAT directories
+set fmri(inputtype) 2
+
+# Carry out pre-stats processing?
+set fmri(filtering_yn) 0
+
+# Brain/background threshold, %
+set fmri(brain_thresh) 10
+
+# Critical z for design efficiency calculation
+set fmri(critical_z) 5.3
+
+# Noise level
+set fmri(noise) 0.66
+
+# Noise AR(1)
+set fmri(noisear) 0.34
+
+# Motion correction
+# 0 : None
+# 1 : MCFLIRT
+set fmri(mc) 1
+
+# Spin-history (currently obsolete)
+set fmri(sh_yn) 0
+
+# B0 fieldmap unwarping?
+set fmri(regunwarp_yn) 0
+
+# GDC Test
+set fmri(gdc) ""
+
+# EPI dwell time (ms)
+set fmri(dwell) 0.0
+
+# EPI TE (ms)
+set fmri(te) 0.0
+
+# % Signal loss threshold
+set fmri(signallossthresh) 10
+
+# Unwarp direction
+set fmri(unwarp_dir) y-
+
+# Slice timing correction
+# 0 : None
+# 1 : Regular up (0, 1, 2, 3, ...)
+# 2 : Regular down
+# 3 : Use slice order file
+# 4 : Use slice timings file
+# 5 : Interleaved (0, 2, 4 ... 1, 3, 5 ... )
+set fmri(st) 0
+
+# Slice timings file
+set fmri(st_file) ""
+
+# BET brain extraction
+set fmri(bet_yn) 1
+
+# Spatial smoothing FWHM (mm)
+set fmri(smooth) 5
+
+# Intensity normalization
+set fmri(norm_yn) 0
+
+# Perfusion subtraction
+set fmri(perfsub_yn) 0
+
+# Highpass temporal filtering
+set fmri(temphp_yn) 1
+
+# Lowpass temporal filtering
+set fmri(templp_yn) 0
+
+# MELODIC ICA data exploration
+set fmri(melodic_yn) 0
+
+# Carry out main stats?
+set fmri(stats_yn) 1
+
+# Carry out prewhitening?
+set fmri(prewhiten_yn) 1
+
+# Add motion parameters to model
+# 0 : No
+# 1 : Yes
+set fmri(motionevs) 0
+set fmri(motionevsbeta) ""
+set fmri(scriptevsbeta) ""
+
+# Robust outlier detection in FLAME?
+set fmri(robust_yn) 0
+
+# Higher-level modelling
+# 3 : Fixed effects
+# 0 : Mixed Effects: Simple OLS
+# 2 : Mixed Effects: FLAME 1
+# 1 : Mixed Effects: FLAME 1+2
+set fmri(mixed_yn) 2
+
+# Higher-level permutations
+set fmri(randomisePermutations) 5000
+
+# Number of EVs
+set fmri(evs_orig) 1
+set fmri(evs_real) 1
+set fmri(evs_vox) 0
+
+# Number of contrasts
+set fmri(ncon_orig) 1
+set fmri(ncon_real) 2
+
+# Number of F-tests
+set fmri(nftests_orig) 0
+set fmri(nftests_real) 0
+
+# Add constant column to design matrix? (obsolete)
+set fmri(constcol) 0
+
+# Carry out post-stats steps?
+set fmri(poststats_yn) 0
+
+# Pre-threshold masking?
+set fmri(threshmask) ""
+
+# Thresholding
+# 0 : None
+# 1 : Uncorrected
+# 2 : Voxel
+# 3 : Cluster
+set fmri(thresh) 3
+
+# P threshold
+set fmri(prob_thresh) 0.05
+
+# Z threshold
+set fmri(z_thresh) 3.1
+
+# Z min/max for colour rendering
+# 0 : Use actual Z min/max
+# 1 : Use preset Z min/max
+set fmri(zdisplay) 0
+
+# Z min in colour rendering
+set fmri(zmin) 2
+
+# Z max in colour rendering
+set fmri(zmax) 8
+
+# Colour rendering type
+# 0 : Solid blobs
+# 1 : Transparent blobs
+set fmri(rendertype) 1
+
+# Background image for higher-level stats overlays
+# 1 : Mean highres
+# 2 : First highres
+# 3 : Mean functional
+# 4 : First functional
+# 5 : Standard space template
+set fmri(bgimage) 1
+
+# Create time series plots
+set fmri(tsplot_yn) 1
+
+# Registration to initial structural
+set fmri(reginitial_highres_yn) 0
+
+# Search space for registration to initial structural
+# 0   : No search
+# 90  : Normal search
+# 180 : Full search
+set fmri(reginitial_highres_search) 90
+
+# Degrees of Freedom for registration to initial structural
+set fmri(reginitial_highres_dof) 3
+
+# Registration to main structural
+set fmri(reghighres_yn) 0
+
+# Search space for registration to main structural
+# 0   : No search
+# 90  : Normal search
+# 180 : Full search
+set fmri(reghighres_search) 90
+
+# Degrees of Freedom for registration to main structural
+set fmri(reghighres_dof) BBR
+
+# Registration to standard image?
+set fmri(regstandard_yn) 1
+
+# Use alternate reference images?
+set fmri(alternateReference_yn) 0
+
+# Standard image
+set fmri(regstandard) "/Users/tur61139/fsl/data/standard/MNI152_T1_2mm_brain"
+
+# Search space for registration to standard space
+# 0   : No search
+# 90  : Normal search
+# 180 : Full search
+set fmri(regstandard_search) 90
+
+# Degrees of Freedom for registration to standard space
+set fmri(regstandard_dof) 12
+
+# Do nonlinear registration from structural to standard space?
+set fmri(regstandard_nonlinear_yn) 0
+
+# Control nonlinear warp field resolution
+set fmri(regstandard_nonlinear_warpres) 10
+
+# High pass filter cutoff
+set fmri(paradigm_hp) 100
+
+# Total voxels
+set fmri(totalVoxels) 215460
+
+
+set fmri(fnirt_config) "T1_2_MNI152_2mm"
+
+
+# Number of lower-level copes feeding into higher-level analysis
+set fmri(ncopeinputs) 0
+
+# 4D AVW data or FEAT directory (1)
+set feat_files(1) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10317/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (2)
+set feat_files(2) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10369/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (3)
+set feat_files(3) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10402/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (4)
+set feat_files(4) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10418/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (5)
+set feat_files(5) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10462/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (6)
+set feat_files(6) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10478/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (7)
+set feat_files(7) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10486/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (8)
+set feat_files(8) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10529/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (9)
+set feat_files(9) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10541/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (10)
+set feat_files(10) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10559/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (11)
+set feat_files(11) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10572/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (12)
+set feat_files(12) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10581/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (13)
+set feat_files(13) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10584/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (14)
+set feat_files(14) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10585/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (15)
+set feat_files(15) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10589/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (16)
+set feat_files(16) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10590/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (17)
+set feat_files(17) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10596/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (18)
+set feat_files(18) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10603/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (19)
+set feat_files(19) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10606/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (20)
+set feat_files(20) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10608/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (21)
+set feat_files(21) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10617/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (22)
+set feat_files(22) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10636/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (23)
+set feat_files(23) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10638/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (24)
+set feat_files(24) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10640/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (25)
+set feat_files(25) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10641/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (26)
+set feat_files(26) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10642/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (27)
+set feat_files(27) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10644/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (28)
+set feat_files(28) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10647/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (29)
+set feat_files(29) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10649/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (30)
+set feat_files(30) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10652/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (31)
+set feat_files(31) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10656/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (32)
+set feat_files(32) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10657/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (33)
+set feat_files(33) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10661/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (34)
+set feat_files(34) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10663/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (35)
+set feat_files(35) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10668/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (36)
+set feat_files(36) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10673/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (37)
+set feat_files(37) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10674/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (38)
+set feat_files(38) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10677/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (39)
+set feat_files(39) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10685/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (40)
+set feat_files(40) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10690/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (41)
+set feat_files(41) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10691/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (42)
+set feat_files(42) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10700/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (43)
+set feat_files(43) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10701/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (44)
+set feat_files(44) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10713/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (45)
+set feat_files(45) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10716/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (46)
+set feat_files(46) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10718/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (47)
+set feat_files(47) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10720/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (48)
+set feat_files(48) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10723/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (49)
+set feat_files(49) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10741/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (50)
+set feat_files(50) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10748/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (51)
+set feat_files(51) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10767/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (52)
+set feat_files(52) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10770/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (53)
+set feat_files(53) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10777/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (54)
+set feat_files(54) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10781/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (55)
+set feat_files(55) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10783/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (56)
+set feat_files(56) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10785/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (57)
+set feat_files(57) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10794/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (58)
+set feat_files(58) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10800/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (59)
+set feat_files(59) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10801/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (60)
+set feat_files(60) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10802/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (61)
+set feat_files(61) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10803/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (62)
+set feat_files(62) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10804/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (63)
+set feat_files(63) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10806/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (64)
+set feat_files(64) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10807/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (65)
+set feat_files(65) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10809/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (66)
+set feat_files(66) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10810/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (67)
+set feat_files(67) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10812/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (68)
+set feat_files(68) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10817/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (69)
+set feat_files(69) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10827/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (70)
+set feat_files(70) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10831/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (71)
+set feat_files(71) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10834/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (72)
+set feat_files(72) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10838/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (73)
+set feat_files(73) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10843/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (74)
+set feat_files(74) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10850/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (75)
+set feat_files(75) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10854/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (76)
+set feat_files(76) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10857/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (77)
+set feat_files(77) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10858/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (78)
+set feat_files(78) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10860/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (79)
+set feat_files(79) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10862/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (80)
+set feat_files(80) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10863/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (81)
+set feat_files(81) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10866/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (82)
+set feat_files(82) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10875/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (83)
+set feat_files(83) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10881/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (84)
+set feat_files(84) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10886/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (85)
+set feat_files(85) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10887/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (86)
+set feat_files(86) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10896/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (87)
+set feat_files(87) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10897/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (88)
+set feat_files(88) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10898/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (89)
+set feat_files(89) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10908/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (90)
+set feat_files(90) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10913/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (91)
+set feat_files(91) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10918/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (92)
+set feat_files(92) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10919/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (93)
+set feat_files(93) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10924/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (94)
+set feat_files(94) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10926/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (95)
+set feat_files(95) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10928/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (96)
+set feat_files(96) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10930/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (97)
+set feat_files(97) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10938/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (98)
+set feat_files(98) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10940/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (99)
+set feat_files(99) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10950/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (100)
+set feat_files(100) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10951/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (101)
+set feat_files(101) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10952/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (102)
+set feat_files(102) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10953/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (103)
+set feat_files(103) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10954/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (104)
+set feat_files(104) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10956/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (105)
+set feat_files(105) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10958/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (106)
+set feat_files(106) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10961/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (107)
+set feat_files(107) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10964/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (108)
+set feat_files(108) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10966/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (109)
+set feat_files(109) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10969/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (110)
+set feat_files(110) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10974/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (111)
+set feat_files(111) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10977/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (112)
+set feat_files(112) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10983/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (113)
+set feat_files(113) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10984/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (114)
+set feat_files(114) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-10998/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (115)
+set feat_files(115) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11005/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (116)
+set feat_files(116) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11007/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (117)
+set feat_files(117) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11012/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (118)
+set feat_files(118) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11016/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (119)
+set feat_files(119) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11021/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (120)
+set feat_files(120) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11030/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (121)
+set feat_files(121) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11031/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (122)
+set feat_files(122) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11036/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (123)
+set feat_files(123) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11039/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (124)
+set feat_files(124) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11042/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (125)
+set feat_files(125) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11053/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (126)
+set feat_files(126) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11058/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (127)
+set feat_files(127) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11060/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (128)
+set feat_files(128) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11063/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (129)
+set feat_files(129) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11064/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (130)
+set feat_files(130) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11065/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (131)
+set feat_files(131) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11066/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (132)
+set feat_files(132) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11068/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (133)
+set feat_files(133) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11071/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (134)
+set feat_files(134) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11072/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (135)
+set feat_files(135) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11074/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (136)
+set feat_files(136) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11075/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (137)
+set feat_files(137) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11076/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (138)
+set feat_files(138) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11078/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (139)
+set feat_files(139) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11083/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (140)
+set feat_files(140) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11084/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (141)
+set feat_files(141) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11090/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (142)
+set feat_files(142) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11110/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (143)
+set feat_files(143) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11113/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (144)
+set feat_files(144) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11116/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (145)
+set feat_files(145) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11120/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (146)
+set feat_files(146) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11126/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (147)
+set feat_files(147) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11128/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (148)
+set feat_files(148) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11134/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (149)
+set feat_files(149) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11139/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (150)
+set feat_files(150) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11145/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (151)
+set feat_files(151) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11164/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (152)
+set feat_files(152) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11167/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (153)
+set feat_files(153) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11168/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (154)
+set feat_files(154) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11177/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (155)
+set feat_files(155) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11192/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (156)
+set feat_files(156) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11193/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (157)
+set feat_files(157) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11201/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-2_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (158)
+set feat_files(158) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11209/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (159)
+set feat_files(159) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11227/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (160)
+set feat_files(160) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11238/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (161)
+set feat_files(161) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11241/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (162)
+set feat_files(162) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11246/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (163)
+set feat_files(163) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11276/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (164)
+set feat_files(164) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11286/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (165)
+set feat_files(165) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11301/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (166)
+set feat_files(166) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11311/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (167)
+set feat_files(167) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11312/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (168)
+set feat_files(168) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11316/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (169)
+set feat_files(169) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11317/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (170)
+set feat_files(170) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11318/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (171)
+set feat_files(171) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11321/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (172)
+set feat_files(172) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11325/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (173)
+set feat_files(173) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11326/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (174)
+set feat_files(174) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11329/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (175)
+set feat_files(175) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11330/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (176)
+set feat_files(176) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11337/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (177)
+set feat_files(177) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11338/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (178)
+set feat_files(178) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11340/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (179)
+set feat_files(179) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11343/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (180)
+set feat_files(180) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11345/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (181)
+set feat_files(181) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11348/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (182)
+set feat_files(182) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11358/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (183)
+set feat_files(183) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11364/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (184)
+set feat_files(184) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11367/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (185)
+set feat_files(185) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11374/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (186)
+set feat_files(186) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11376/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (187)
+set feat_files(187) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11377/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (188)
+set feat_files(188) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11387/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (189)
+set feat_files(189) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11410/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (190)
+set feat_files(190) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11416/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (191)
+set feat_files(191) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11426/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (192)
+set feat_files(192) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11430/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (193)
+set feat_files(193) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11432/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (194)
+set feat_files(194) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11433/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (195)
+set feat_files(195) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11435/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (196)
+set feat_files(196) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11439/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (197)
+set feat_files(197) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11440/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (198)
+set feat_files(198) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11443/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (199)
+set feat_files(199) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11450/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (200)
+set feat_files(200) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11451/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (201)
+set feat_files(201) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11461/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (202)
+set feat_files(202) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11462/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (203)
+set feat_files(203) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11472/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (204)
+set feat_files(204) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11492/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (205)
+set feat_files(205) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11493/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (206)
+set feat_files(206) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11498/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (207)
+set feat_files(207) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11517/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (208)
+set feat_files(208) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11518/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (209)
+set feat_files(209) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11523/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (210)
+set feat_files(210) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11526/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (211)
+set feat_files(211) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11527/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (212)
+set feat_files(212) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11529/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (213)
+set feat_files(213) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11530/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (214)
+set feat_files(214) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11532/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (215)
+set feat_files(215) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11533/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (216)
+set feat_files(216) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11534/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (217)
+set feat_files(217) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11535/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (218)
+set feat_files(218) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11536/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (219)
+set feat_files(219) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11539/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (220)
+set feat_files(220) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11540/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (221)
+set feat_files(221) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11542/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (222)
+set feat_files(222) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11545/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (223)
+set feat_files(223) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11551/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (224)
+set feat_files(224) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11559/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (225)
+set feat_files(225) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11560/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (226)
+set feat_files(226) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11563/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (227)
+set feat_files(227) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11565/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (228)
+set feat_files(228) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11570/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (229)
+set feat_files(229) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11572/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (230)
+set feat_files(230) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11579/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (231)
+set feat_files(231) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11586/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (232)
+set feat_files(232) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11587/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (233)
+set feat_files(233) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11588/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (234)
+set feat_files(234) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11591/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (235)
+set feat_files(235) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11597/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (236)
+set feat_files(236) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11598/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (237)
+set feat_files(237) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11599/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (238)
+set feat_files(238) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11600/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (239)
+set feat_files(239) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11606/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (240)
+set feat_files(240) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11614/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (241)
+set feat_files(241) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11622/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (242)
+set feat_files(242) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11623/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (243)
+set feat_files(243) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11625/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (244)
+set feat_files(244) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11626/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (245)
+set feat_files(245) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11628/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (246)
+set feat_files(246) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11631/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (247)
+set feat_files(247) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11651/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (248)
+set feat_files(248) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11660/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (249)
+set feat_files(249) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11670/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (250)
+set feat_files(250) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11674/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (251)
+set feat_files(251) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11679/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (252)
+set feat_files(252) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11681/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (253)
+set feat_files(253) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11694/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (254)
+set feat_files(254) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11701/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (255)
+set feat_files(255) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11703/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (256)
+set feat_files(256) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11705/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (257)
+set feat_files(257) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11709/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (258)
+set feat_files(258) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11710/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (259)
+set feat_files(259) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11714/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (260)
+set feat_files(260) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11720/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (261)
+set feat_files(261) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11722/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (262)
+set feat_files(262) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11723/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (263)
+set feat_files(263) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11736/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (264)
+set feat_files(264) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11744/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (265)
+set feat_files(265) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11746/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (266)
+set feat_files(266) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11748/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (267)
+set feat_files(267) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11756/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (268)
+set feat_files(268) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11764/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (269)
+set feat_files(269) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11772/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (270)
+set feat_files(270) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11773/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (271)
+set feat_files(271) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11774/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (272)
+set feat_files(272) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11784/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (273)
+set feat_files(273) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11787/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (274)
+set feat_files(274) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11788/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (275)
+set feat_files(275) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11789/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (276)
+set feat_files(276) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11790/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (277)
+set feat_files(277) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11793/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (278)
+set feat_files(278) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11795/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (279)
+set feat_files(279) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11815/ses-01/L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat/stats/copeCOPENUM.nii.gz"
+
+# 4D AVW data or FEAT directory (280)
+set feat_files(280) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11822/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (281)
+set feat_files(281) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11823/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (282)
+set feat_files(282) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11824/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (283)
+set feat_files(283) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11828/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (284)
+set feat_files(284) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11829/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (285)
+set feat_files(285) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11840/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (286)
+set feat_files(286) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11847/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (287)
+set feat_files(287) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11853/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (288)
+set feat_files(288) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11854/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (289)
+set feat_files(289) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11861/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (290)
+set feat_files(290) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11866/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (291)
+set feat_files(291) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11867/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (292)
+set feat_files(292) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11870/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (293)
+set feat_files(293) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11872/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (294)
+set feat_files(294) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11876/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (295)
+set feat_files(295) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11877/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (296)
+set feat_files(296) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11881/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (297)
+set feat_files(297) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11885/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (298)
+set feat_files(298) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11891/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (299)
+set feat_files(299) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11897/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (300)
+set feat_files(300) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11900/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (301)
+set feat_files(301) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11902/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (302)
+set feat_files(302) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11909/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (303)
+set feat_files(303) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11913/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (304)
+set feat_files(304) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11914/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (305)
+set feat_files(305) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11920/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (306)
+set feat_files(306) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11922/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (307)
+set feat_files(307) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11923/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (308)
+set feat_files(308) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11924/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (309)
+set feat_files(309) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11926/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (310)
+set feat_files(310) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11928/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (311)
+set feat_files(311) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11929/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (312)
+set feat_files(312) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11931/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (313)
+set feat_files(313) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11935/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (314)
+set feat_files(314) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11939/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (315)
+set feat_files(315) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11943/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (316)
+set feat_files(316) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11949/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (317)
+set feat_files(317) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11960/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (318)
+set feat_files(318) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11969/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (319)
+set feat_files(319) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11974/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (320)
+set feat_files(320) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11976/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (321)
+set feat_files(321) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11982/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (322)
+set feat_files(322) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-11984/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (323)
+set feat_files(323) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12008/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (324)
+set feat_files(324) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12011/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (325)
+set feat_files(325) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12013/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (326)
+set feat_files(326) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12020/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (327)
+set feat_files(327) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12021/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (328)
+set feat_files(328) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12031/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (329)
+set feat_files(329) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12033/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (330)
+set feat_files(330) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12036/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (331)
+set feat_files(331) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12037/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (332)
+set feat_files(332) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12038/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (333)
+set feat_files(333) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12039/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (334)
+set feat_files(334) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12041/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (335)
+set feat_files(335) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12047/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (336)
+set feat_files(336) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12049/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (337)
+set feat_files(337) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12051/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (338)
+set feat_files(338) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12055/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# 4D AVW data or FEAT directory (339)
+set feat_files(339) "/ZPOOL/data/projects/rf1-sra-ugr/derivatives/fsl/sub-12057/ses-01/L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat/copeCOPENUM.feat/stats/cope1.nii.gz"
+
+# Add confound EVs text file
+set fmri(confoundevs) 0
+
+# EV 1 title
+set fmri(evtitle1) "Ones"
+
+# Basic waveform shape (EV 1)
+# 0 : Square
+# 1 : Sinusoid
+# 2 : Custom (1 entry per volume)
+# 3 : Custom (3 column format)
+# 4 : Interaction
+# 10 : Empty (all zeros)
+set fmri(shape1) 2
+
+# Convolution (EV 1)
+# 0 : None
+# 1 : Gaussian
+# 2 : Gamma
+# 3 : Double-Gamma HRF
+# 4 : Gamma basis functions
+# 5 : Sine basis functions
+# 6 : FIR basis functions
+# 8 : Alternate Double-Gamma
+set fmri(convolve1) 0
+
+# Convolve phase (EV 1)
+set fmri(convolve_phase1) 0
+
+# Apply temporal filtering (EV 1)
+set fmri(tempfilt_yn1) 0
+
+# Add temporal derivative (EV 1)
+set fmri(deriv_yn1) 0
+
+# Custom EV file (EV 1)
+set fmri(custom1) "dummy"
+
+# Orthogonalise EV 1 wrt EV 0
+set fmri(ortho1.0) 0
+
+# Orthogonalise EV 1 wrt EV 1
+set fmri(ortho1.1) 0
+
+# Higher-level EV value for EV 1 and input 1
+set fmri(evg1.1) 1
+
+# Higher-level EV value for EV 1 and input 2
+set fmri(evg2.1) 1
+
+# Higher-level EV value for EV 1 and input 3
+set fmri(evg3.1) 1
+
+# Higher-level EV value for EV 1 and input 4
+set fmri(evg4.1) 1
+
+# Higher-level EV value for EV 1 and input 5
+set fmri(evg5.1) 1
+
+# Higher-level EV value for EV 1 and input 6
+set fmri(evg6.1) 1
+
+# Higher-level EV value for EV 1 and input 7
+set fmri(evg7.1) 1
+
+# Higher-level EV value for EV 1 and input 8
+set fmri(evg8.1) 1
+
+# Higher-level EV value for EV 1 and input 9
+set fmri(evg9.1) 1
+
+# Higher-level EV value for EV 1 and input 10
+set fmri(evg10.1) 1
+
+# Higher-level EV value for EV 1 and input 11
+set fmri(evg11.1) 1
+
+# Higher-level EV value for EV 1 and input 12
+set fmri(evg12.1) 1
+
+# Higher-level EV value for EV 1 and input 13
+set fmri(evg13.1) 1
+
+# Higher-level EV value for EV 1 and input 14
+set fmri(evg14.1) 1
+
+# Higher-level EV value for EV 1 and input 15
+set fmri(evg15.1) 1
+
+# Higher-level EV value for EV 1 and input 16
+set fmri(evg16.1) 1
+
+# Higher-level EV value for EV 1 and input 17
+set fmri(evg17.1) 1
+
+# Higher-level EV value for EV 1 and input 18
+set fmri(evg18.1) 1
+
+# Higher-level EV value for EV 1 and input 19
+set fmri(evg19.1) 1
+
+# Higher-level EV value for EV 1 and input 20
+set fmri(evg20.1) 1
+
+# Higher-level EV value for EV 1 and input 21
+set fmri(evg21.1) 1
+
+# Higher-level EV value for EV 1 and input 22
+set fmri(evg22.1) 1
+
+# Higher-level EV value for EV 1 and input 23
+set fmri(evg23.1) 1
+
+# Higher-level EV value for EV 1 and input 24
+set fmri(evg24.1) 1
+
+# Higher-level EV value for EV 1 and input 25
+set fmri(evg25.1) 1
+
+# Higher-level EV value for EV 1 and input 26
+set fmri(evg26.1) 1
+
+# Higher-level EV value for EV 1 and input 27
+set fmri(evg27.1) 1
+
+# Higher-level EV value for EV 1 and input 28
+set fmri(evg28.1) 1
+
+# Higher-level EV value for EV 1 and input 29
+set fmri(evg29.1) 1
+
+# Higher-level EV value for EV 1 and input 30
+set fmri(evg30.1) 1
+
+# Higher-level EV value for EV 1 and input 31
+set fmri(evg31.1) 1
+
+# Higher-level EV value for EV 1 and input 32
+set fmri(evg32.1) 1
+
+# Higher-level EV value for EV 1 and input 33
+set fmri(evg33.1) 1
+
+# Higher-level EV value for EV 1 and input 34
+set fmri(evg34.1) 1
+
+# Higher-level EV value for EV 1 and input 35
+set fmri(evg35.1) 1
+
+# Higher-level EV value for EV 1 and input 36
+set fmri(evg36.1) 1
+
+# Higher-level EV value for EV 1 and input 37
+set fmri(evg37.1) 1
+
+# Higher-level EV value for EV 1 and input 38
+set fmri(evg38.1) 1
+
+# Higher-level EV value for EV 1 and input 39
+set fmri(evg39.1) 1
+
+# Higher-level EV value for EV 1 and input 40
+set fmri(evg40.1) 1
+
+# Higher-level EV value for EV 1 and input 41
+set fmri(evg41.1) 1
+
+# Higher-level EV value for EV 1 and input 42
+set fmri(evg42.1) 1
+
+# Higher-level EV value for EV 1 and input 43
+set fmri(evg43.1) 1
+
+# Higher-level EV value for EV 1 and input 44
+set fmri(evg44.1) 1
+
+# Higher-level EV value for EV 1 and input 45
+set fmri(evg45.1) 1
+
+# Higher-level EV value for EV 1 and input 46
+set fmri(evg46.1) 1
+
+# Higher-level EV value for EV 1 and input 47
+set fmri(evg47.1) 1
+
+# Higher-level EV value for EV 1 and input 48
+set fmri(evg48.1) 1
+
+# Higher-level EV value for EV 1 and input 49
+set fmri(evg49.1) 1
+
+# Higher-level EV value for EV 1 and input 50
+set fmri(evg50.1) 1
+
+# Higher-level EV value for EV 1 and input 51
+set fmri(evg51.1) 1
+
+# Higher-level EV value for EV 1 and input 52
+set fmri(evg52.1) 1
+
+# Higher-level EV value for EV 1 and input 53
+set fmri(evg53.1) 1
+
+# Higher-level EV value for EV 1 and input 54
+set fmri(evg54.1) 1
+
+# Higher-level EV value for EV 1 and input 55
+set fmri(evg55.1) 1
+
+# Higher-level EV value for EV 1 and input 56
+set fmri(evg56.1) 1
+
+# Higher-level EV value for EV 1 and input 57
+set fmri(evg57.1) 1
+
+# Higher-level EV value for EV 1 and input 58
+set fmri(evg58.1) 1
+
+# Higher-level EV value for EV 1 and input 59
+set fmri(evg59.1) 1
+
+# Higher-level EV value for EV 1 and input 60
+set fmri(evg60.1) 1
+
+# Higher-level EV value for EV 1 and input 61
+set fmri(evg61.1) 1
+
+# Higher-level EV value for EV 1 and input 62
+set fmri(evg62.1) 1
+
+# Higher-level EV value for EV 1 and input 63
+set fmri(evg63.1) 1
+
+# Higher-level EV value for EV 1 and input 64
+set fmri(evg64.1) 1
+
+# Higher-level EV value for EV 1 and input 65
+set fmri(evg65.1) 1
+
+# Higher-level EV value for EV 1 and input 66
+set fmri(evg66.1) 1
+
+# Higher-level EV value for EV 1 and input 67
+set fmri(evg67.1) 1
+
+# Higher-level EV value for EV 1 and input 68
+set fmri(evg68.1) 1
+
+# Higher-level EV value for EV 1 and input 69
+set fmri(evg69.1) 1
+
+# Higher-level EV value for EV 1 and input 70
+set fmri(evg70.1) 1
+
+# Higher-level EV value for EV 1 and input 71
+set fmri(evg71.1) 1
+
+# Higher-level EV value for EV 1 and input 72
+set fmri(evg72.1) 1
+
+# Higher-level EV value for EV 1 and input 73
+set fmri(evg73.1) 1
+
+# Higher-level EV value for EV 1 and input 74
+set fmri(evg74.1) 1
+
+# Higher-level EV value for EV 1 and input 75
+set fmri(evg75.1) 1
+
+# Higher-level EV value for EV 1 and input 76
+set fmri(evg76.1) 1
+
+# Higher-level EV value for EV 1 and input 77
+set fmri(evg77.1) 1
+
+# Higher-level EV value for EV 1 and input 78
+set fmri(evg78.1) 1
+
+# Higher-level EV value for EV 1 and input 79
+set fmri(evg79.1) 1
+
+# Higher-level EV value for EV 1 and input 80
+set fmri(evg80.1) 1
+
+# Higher-level EV value for EV 1 and input 81
+set fmri(evg81.1) 1
+
+# Higher-level EV value for EV 1 and input 82
+set fmri(evg82.1) 1
+
+# Higher-level EV value for EV 1 and input 83
+set fmri(evg83.1) 1
+
+# Higher-level EV value for EV 1 and input 84
+set fmri(evg84.1) 1
+
+# Higher-level EV value for EV 1 and input 85
+set fmri(evg85.1) 1
+
+# Higher-level EV value for EV 1 and input 86
+set fmri(evg86.1) 1
+
+# Higher-level EV value for EV 1 and input 87
+set fmri(evg87.1) 1
+
+# Higher-level EV value for EV 1 and input 88
+set fmri(evg88.1) 1
+
+# Higher-level EV value for EV 1 and input 89
+set fmri(evg89.1) 1
+
+# Higher-level EV value for EV 1 and input 90
+set fmri(evg90.1) 1
+
+# Higher-level EV value for EV 1 and input 91
+set fmri(evg91.1) 1
+
+# Higher-level EV value for EV 1 and input 92
+set fmri(evg92.1) 1
+
+# Higher-level EV value for EV 1 and input 93
+set fmri(evg93.1) 1
+
+# Higher-level EV value for EV 1 and input 94
+set fmri(evg94.1) 1
+
+# Higher-level EV value for EV 1 and input 95
+set fmri(evg95.1) 1
+
+# Higher-level EV value for EV 1 and input 96
+set fmri(evg96.1) 1
+
+# Higher-level EV value for EV 1 and input 97
+set fmri(evg97.1) 1
+
+# Higher-level EV value for EV 1 and input 98
+set fmri(evg98.1) 1
+
+# Higher-level EV value for EV 1 and input 99
+set fmri(evg99.1) 1
+
+# Higher-level EV value for EV 1 and input 100
+set fmri(evg100.1) 1
+
+# Higher-level EV value for EV 1 and input 101
+set fmri(evg101.1) 1
+
+# Higher-level EV value for EV 1 and input 102
+set fmri(evg102.1) 1
+
+# Higher-level EV value for EV 1 and input 103
+set fmri(evg103.1) 1
+
+# Higher-level EV value for EV 1 and input 104
+set fmri(evg104.1) 1
+
+# Higher-level EV value for EV 1 and input 105
+set fmri(evg105.1) 1
+
+# Higher-level EV value for EV 1 and input 106
+set fmri(evg106.1) 1
+
+# Higher-level EV value for EV 1 and input 107
+set fmri(evg107.1) 1
+
+# Higher-level EV value for EV 1 and input 108
+set fmri(evg108.1) 1
+
+# Higher-level EV value for EV 1 and input 109
+set fmri(evg109.1) 1
+
+# Higher-level EV value for EV 1 and input 110
+set fmri(evg110.1) 1
+
+# Higher-level EV value for EV 1 and input 111
+set fmri(evg111.1) 1
+
+# Higher-level EV value for EV 1 and input 112
+set fmri(evg112.1) 1
+
+# Higher-level EV value for EV 1 and input 113
+set fmri(evg113.1) 1
+
+# Higher-level EV value for EV 1 and input 114
+set fmri(evg114.1) 1
+
+# Higher-level EV value for EV 1 and input 115
+set fmri(evg115.1) 1
+
+# Higher-level EV value for EV 1 and input 116
+set fmri(evg116.1) 1
+
+# Higher-level EV value for EV 1 and input 117
+set fmri(evg117.1) 1
+
+# Higher-level EV value for EV 1 and input 118
+set fmri(evg118.1) 1
+
+# Higher-level EV value for EV 1 and input 119
+set fmri(evg119.1) 1
+
+# Higher-level EV value for EV 1 and input 120
+set fmri(evg120.1) 1
+
+# Higher-level EV value for EV 1 and input 121
+set fmri(evg121.1) 1
+
+# Higher-level EV value for EV 1 and input 122
+set fmri(evg122.1) 1
+
+# Higher-level EV value for EV 1 and input 123
+set fmri(evg123.1) 1
+
+# Higher-level EV value for EV 1 and input 124
+set fmri(evg124.1) 1
+
+# Higher-level EV value for EV 1 and input 125
+set fmri(evg125.1) 1
+
+# Higher-level EV value for EV 1 and input 126
+set fmri(evg126.1) 1
+
+# Higher-level EV value for EV 1 and input 127
+set fmri(evg127.1) 1
+
+# Higher-level EV value for EV 1 and input 128
+set fmri(evg128.1) 1
+
+# Higher-level EV value for EV 1 and input 129
+set fmri(evg129.1) 1
+
+# Higher-level EV value for EV 1 and input 130
+set fmri(evg130.1) 1
+
+# Higher-level EV value for EV 1 and input 131
+set fmri(evg131.1) 1
+
+# Higher-level EV value for EV 1 and input 132
+set fmri(evg132.1) 1
+
+# Higher-level EV value for EV 1 and input 133
+set fmri(evg133.1) 1
+
+# Higher-level EV value for EV 1 and input 134
+set fmri(evg134.1) 1
+
+# Higher-level EV value for EV 1 and input 135
+set fmri(evg135.1) 1
+
+# Higher-level EV value for EV 1 and input 136
+set fmri(evg136.1) 1
+
+# Higher-level EV value for EV 1 and input 137
+set fmri(evg137.1) 1
+
+# Higher-level EV value for EV 1 and input 138
+set fmri(evg138.1) 1
+
+# Higher-level EV value for EV 1 and input 139
+set fmri(evg139.1) 1
+
+# Higher-level EV value for EV 1 and input 140
+set fmri(evg140.1) 1
+
+# Higher-level EV value for EV 1 and input 141
+set fmri(evg141.1) 1
+
+# Higher-level EV value for EV 1 and input 142
+set fmri(evg142.1) 1
+
+# Higher-level EV value for EV 1 and input 143
+set fmri(evg143.1) 1
+
+# Higher-level EV value for EV 1 and input 144
+set fmri(evg144.1) 1
+
+# Higher-level EV value for EV 1 and input 145
+set fmri(evg145.1) 1
+
+# Higher-level EV value for EV 1 and input 146
+set fmri(evg146.1) 1
+
+# Higher-level EV value for EV 1 and input 147
+set fmri(evg147.1) 1
+
+# Higher-level EV value for EV 1 and input 148
+set fmri(evg148.1) 1
+
+# Higher-level EV value for EV 1 and input 149
+set fmri(evg149.1) 1
+
+# Higher-level EV value for EV 1 and input 150
+set fmri(evg150.1) 1
+
+# Higher-level EV value for EV 1 and input 151
+set fmri(evg151.1) 1
+
+# Higher-level EV value for EV 1 and input 152
+set fmri(evg152.1) 1
+
+# Higher-level EV value for EV 1 and input 153
+set fmri(evg153.1) 1
+
+# Higher-level EV value for EV 1 and input 154
+set fmri(evg154.1) 1
+
+# Higher-level EV value for EV 1 and input 155
+set fmri(evg155.1) 1
+
+# Higher-level EV value for EV 1 and input 156
+set fmri(evg156.1) 1
+
+# Higher-level EV value for EV 1 and input 157
+set fmri(evg157.1) 1
+
+# Higher-level EV value for EV 1 and input 158
+set fmri(evg158.1) 1
+
+# Higher-level EV value for EV 1 and input 159
+set fmri(evg159.1) 1
+
+# Higher-level EV value for EV 1 and input 160
+set fmri(evg160.1) 1
+
+# Higher-level EV value for EV 1 and input 161
+set fmri(evg161.1) 1
+
+# Higher-level EV value for EV 1 and input 162
+set fmri(evg162.1) 1
+
+# Higher-level EV value for EV 1 and input 163
+set fmri(evg163.1) 1
+
+# Higher-level EV value for EV 1 and input 164
+set fmri(evg164.1) 1
+
+# Higher-level EV value for EV 1 and input 165
+set fmri(evg165.1) 1
+
+# Higher-level EV value for EV 1 and input 166
+set fmri(evg166.1) 1
+
+# Higher-level EV value for EV 1 and input 167
+set fmri(evg167.1) 1
+
+# Higher-level EV value for EV 1 and input 168
+set fmri(evg168.1) 1
+
+# Higher-level EV value for EV 1 and input 169
+set fmri(evg169.1) 1
+
+# Higher-level EV value for EV 1 and input 170
+set fmri(evg170.1) 1
+
+# Higher-level EV value for EV 1 and input 171
+set fmri(evg171.1) 1
+
+# Higher-level EV value for EV 1 and input 172
+set fmri(evg172.1) 1
+
+# Higher-level EV value for EV 1 and input 173
+set fmri(evg173.1) 1
+
+# Higher-level EV value for EV 1 and input 174
+set fmri(evg174.1) 1
+
+# Higher-level EV value for EV 1 and input 175
+set fmri(evg175.1) 1
+
+# Higher-level EV value for EV 1 and input 176
+set fmri(evg176.1) 1
+
+# Higher-level EV value for EV 1 and input 177
+set fmri(evg177.1) 1
+
+# Higher-level EV value for EV 1 and input 178
+set fmri(evg178.1) 1
+
+# Higher-level EV value for EV 1 and input 179
+set fmri(evg179.1) 1
+
+# Higher-level EV value for EV 1 and input 180
+set fmri(evg180.1) 1
+
+# Higher-level EV value for EV 1 and input 181
+set fmri(evg181.1) 1
+
+# Higher-level EV value for EV 1 and input 182
+set fmri(evg182.1) 1
+
+# Higher-level EV value for EV 1 and input 183
+set fmri(evg183.1) 1
+
+# Higher-level EV value for EV 1 and input 184
+set fmri(evg184.1) 1
+
+# Higher-level EV value for EV 1 and input 185
+set fmri(evg185.1) 1
+
+# Higher-level EV value for EV 1 and input 186
+set fmri(evg186.1) 1
+
+# Higher-level EV value for EV 1 and input 187
+set fmri(evg187.1) 1
+
+# Higher-level EV value for EV 1 and input 188
+set fmri(evg188.1) 1
+
+# Higher-level EV value for EV 1 and input 189
+set fmri(evg189.1) 1
+
+# Higher-level EV value for EV 1 and input 190
+set fmri(evg190.1) 1
+
+# Higher-level EV value for EV 1 and input 191
+set fmri(evg191.1) 1
+
+# Higher-level EV value for EV 1 and input 192
+set fmri(evg192.1) 1
+
+# Higher-level EV value for EV 1 and input 193
+set fmri(evg193.1) 1
+
+# Higher-level EV value for EV 1 and input 194
+set fmri(evg194.1) 1
+
+# Higher-level EV value for EV 1 and input 195
+set fmri(evg195.1) 1
+
+# Higher-level EV value for EV 1 and input 196
+set fmri(evg196.1) 1
+
+# Higher-level EV value for EV 1 and input 197
+set fmri(evg197.1) 1
+
+# Higher-level EV value for EV 1 and input 198
+set fmri(evg198.1) 1
+
+# Higher-level EV value for EV 1 and input 199
+set fmri(evg199.1) 1
+
+# Higher-level EV value for EV 1 and input 200
+set fmri(evg200.1) 1
+
+# Higher-level EV value for EV 1 and input 201
+set fmri(evg201.1) 1
+
+# Higher-level EV value for EV 1 and input 202
+set fmri(evg202.1) 1
+
+# Higher-level EV value for EV 1 and input 203
+set fmri(evg203.1) 1
+
+# Higher-level EV value for EV 1 and input 204
+set fmri(evg204.1) 1
+
+# Higher-level EV value for EV 1 and input 205
+set fmri(evg205.1) 1
+
+# Higher-level EV value for EV 1 and input 206
+set fmri(evg206.1) 1
+
+# Higher-level EV value for EV 1 and input 207
+set fmri(evg207.1) 1
+
+# Higher-level EV value for EV 1 and input 208
+set fmri(evg208.1) 1
+
+# Higher-level EV value for EV 1 and input 209
+set fmri(evg209.1) 1
+
+# Higher-level EV value for EV 1 and input 210
+set fmri(evg210.1) 1
+
+# Higher-level EV value for EV 1 and input 211
+set fmri(evg211.1) 1
+
+# Higher-level EV value for EV 1 and input 212
+set fmri(evg212.1) 1
+
+# Higher-level EV value for EV 1 and input 213
+set fmri(evg213.1) 1
+
+# Higher-level EV value for EV 1 and input 214
+set fmri(evg214.1) 1
+
+# Higher-level EV value for EV 1 and input 215
+set fmri(evg215.1) 1
+
+# Higher-level EV value for EV 1 and input 216
+set fmri(evg216.1) 1
+
+# Higher-level EV value for EV 1 and input 217
+set fmri(evg217.1) 1
+
+# Higher-level EV value for EV 1 and input 218
+set fmri(evg218.1) 1
+
+# Higher-level EV value for EV 1 and input 219
+set fmri(evg219.1) 1
+
+# Higher-level EV value for EV 1 and input 220
+set fmri(evg220.1) 1
+
+# Higher-level EV value for EV 1 and input 221
+set fmri(evg221.1) 1
+
+# Higher-level EV value for EV 1 and input 222
+set fmri(evg222.1) 1
+
+# Higher-level EV value for EV 1 and input 223
+set fmri(evg223.1) 1
+
+# Higher-level EV value for EV 1 and input 224
+set fmri(evg224.1) 1
+
+# Higher-level EV value for EV 1 and input 225
+set fmri(evg225.1) 1
+
+# Higher-level EV value for EV 1 and input 226
+set fmri(evg226.1) 1
+
+# Higher-level EV value for EV 1 and input 227
+set fmri(evg227.1) 1
+
+# Higher-level EV value for EV 1 and input 228
+set fmri(evg228.1) 1
+
+# Higher-level EV value for EV 1 and input 229
+set fmri(evg229.1) 1
+
+# Higher-level EV value for EV 1 and input 230
+set fmri(evg230.1) 1
+
+# Higher-level EV value for EV 1 and input 231
+set fmri(evg231.1) 1
+
+# Higher-level EV value for EV 1 and input 232
+set fmri(evg232.1) 1
+
+# Higher-level EV value for EV 1 and input 233
+set fmri(evg233.1) 1
+
+# Higher-level EV value for EV 1 and input 234
+set fmri(evg234.1) 1
+
+# Higher-level EV value for EV 1 and input 235
+set fmri(evg235.1) 1
+
+# Higher-level EV value for EV 1 and input 236
+set fmri(evg236.1) 1
+
+# Higher-level EV value for EV 1 and input 237
+set fmri(evg237.1) 1
+
+# Higher-level EV value for EV 1 and input 238
+set fmri(evg238.1) 1
+
+# Higher-level EV value for EV 1 and input 239
+set fmri(evg239.1) 1
+
+# Higher-level EV value for EV 1 and input 240
+set fmri(evg240.1) 1
+
+# Higher-level EV value for EV 1 and input 241
+set fmri(evg241.1) 1
+
+# Higher-level EV value for EV 1 and input 242
+set fmri(evg242.1) 1
+
+# Higher-level EV value for EV 1 and input 243
+set fmri(evg243.1) 1
+
+# Higher-level EV value for EV 1 and input 244
+set fmri(evg244.1) 1
+
+# Higher-level EV value for EV 1 and input 245
+set fmri(evg245.1) 1
+
+# Higher-level EV value for EV 1 and input 246
+set fmri(evg246.1) 1
+
+# Higher-level EV value for EV 1 and input 247
+set fmri(evg247.1) 1
+
+# Higher-level EV value for EV 1 and input 248
+set fmri(evg248.1) 1
+
+# Higher-level EV value for EV 1 and input 249
+set fmri(evg249.1) 1
+
+# Higher-level EV value for EV 1 and input 250
+set fmri(evg250.1) 1
+
+# Higher-level EV value for EV 1 and input 251
+set fmri(evg251.1) 1
+
+# Higher-level EV value for EV 1 and input 252
+set fmri(evg252.1) 1
+
+# Higher-level EV value for EV 1 and input 253
+set fmri(evg253.1) 1
+
+# Higher-level EV value for EV 1 and input 254
+set fmri(evg254.1) 1
+
+# Higher-level EV value for EV 1 and input 255
+set fmri(evg255.1) 1
+
+# Higher-level EV value for EV 1 and input 256
+set fmri(evg256.1) 1
+
+# Higher-level EV value for EV 1 and input 257
+set fmri(evg257.1) 1
+
+# Higher-level EV value for EV 1 and input 258
+set fmri(evg258.1) 1
+
+# Higher-level EV value for EV 1 and input 259
+set fmri(evg259.1) 1
+
+# Higher-level EV value for EV 1 and input 260
+set fmri(evg260.1) 1
+
+# Higher-level EV value for EV 1 and input 261
+set fmri(evg261.1) 1
+
+# Higher-level EV value for EV 1 and input 262
+set fmri(evg262.1) 1
+
+# Higher-level EV value for EV 1 and input 263
+set fmri(evg263.1) 1
+
+# Higher-level EV value for EV 1 and input 264
+set fmri(evg264.1) 1
+
+# Higher-level EV value for EV 1 and input 265
+set fmri(evg265.1) 1
+
+# Higher-level EV value for EV 1 and input 266
+set fmri(evg266.1) 1
+
+# Higher-level EV value for EV 1 and input 267
+set fmri(evg267.1) 1
+
+# Higher-level EV value for EV 1 and input 268
+set fmri(evg268.1) 1
+
+# Higher-level EV value for EV 1 and input 269
+set fmri(evg269.1) 1
+
+# Higher-level EV value for EV 1 and input 270
+set fmri(evg270.1) 1
+
+# Higher-level EV value for EV 1 and input 271
+set fmri(evg271.1) 1
+
+# Higher-level EV value for EV 1 and input 272
+set fmri(evg272.1) 1
+
+# Higher-level EV value for EV 1 and input 273
+set fmri(evg273.1) 1
+
+# Higher-level EV value for EV 1 and input 274
+set fmri(evg274.1) 1
+
+# Higher-level EV value for EV 1 and input 275
+set fmri(evg275.1) 1
+
+# Higher-level EV value for EV 1 and input 276
+set fmri(evg276.1) 1
+
+# Higher-level EV value for EV 1 and input 277
+set fmri(evg277.1) 1
+
+# Higher-level EV value for EV 1 and input 278
+set fmri(evg278.1) 1
+
+# Higher-level EV value for EV 1 and input 279
+set fmri(evg279.1) 1
+
+# Higher-level EV value for EV 1 and input 280
+set fmri(evg280.1) 1
+
+# Higher-level EV value for EV 1 and input 281
+set fmri(evg281.1) 1
+
+# Higher-level EV value for EV 1 and input 282
+set fmri(evg282.1) 1
+
+# Higher-level EV value for EV 1 and input 283
+set fmri(evg283.1) 1
+
+# Higher-level EV value for EV 1 and input 284
+set fmri(evg284.1) 1
+
+# Higher-level EV value for EV 1 and input 285
+set fmri(evg285.1) 1
+
+# Higher-level EV value for EV 1 and input 286
+set fmri(evg286.1) 1
+
+# Higher-level EV value for EV 1 and input 287
+set fmri(evg287.1) 1
+
+# Higher-level EV value for EV 1 and input 288
+set fmri(evg288.1) 1
+
+# Higher-level EV value for EV 1 and input 289
+set fmri(evg289.1) 1
+
+# Higher-level EV value for EV 1 and input 290
+set fmri(evg290.1) 1
+
+# Higher-level EV value for EV 1 and input 291
+set fmri(evg291.1) 1
+
+# Higher-level EV value for EV 1 and input 292
+set fmri(evg292.1) 1
+
+# Higher-level EV value for EV 1 and input 293
+set fmri(evg293.1) 1
+
+# Higher-level EV value for EV 1 and input 294
+set fmri(evg294.1) 1
+
+# Higher-level EV value for EV 1 and input 295
+set fmri(evg295.1) 1
+
+# Higher-level EV value for EV 1 and input 296
+set fmri(evg296.1) 1
+
+# Higher-level EV value for EV 1 and input 297
+set fmri(evg297.1) 1
+
+# Higher-level EV value for EV 1 and input 298
+set fmri(evg298.1) 1
+
+# Higher-level EV value for EV 1 and input 299
+set fmri(evg299.1) 1
+
+# Higher-level EV value for EV 1 and input 300
+set fmri(evg300.1) 1
+
+# Higher-level EV value for EV 1 and input 301
+set fmri(evg301.1) 1
+
+# Higher-level EV value for EV 1 and input 302
+set fmri(evg302.1) 1
+
+# Higher-level EV value for EV 1 and input 303
+set fmri(evg303.1) 1
+
+# Higher-level EV value for EV 1 and input 304
+set fmri(evg304.1) 1
+
+# Higher-level EV value for EV 1 and input 305
+set fmri(evg305.1) 1
+
+# Higher-level EV value for EV 1 and input 306
+set fmri(evg306.1) 1
+
+# Higher-level EV value for EV 1 and input 307
+set fmri(evg307.1) 1
+
+# Higher-level EV value for EV 1 and input 308
+set fmri(evg308.1) 1
+
+# Higher-level EV value for EV 1 and input 309
+set fmri(evg309.1) 1
+
+# Higher-level EV value for EV 1 and input 310
+set fmri(evg310.1) 1
+
+# Higher-level EV value for EV 1 and input 311
+set fmri(evg311.1) 1
+
+# Higher-level EV value for EV 1 and input 312
+set fmri(evg312.1) 1
+
+# Higher-level EV value for EV 1 and input 313
+set fmri(evg313.1) 1
+
+# Higher-level EV value for EV 1 and input 314
+set fmri(evg314.1) 1
+
+# Higher-level EV value for EV 1 and input 315
+set fmri(evg315.1) 1
+
+# Higher-level EV value for EV 1 and input 316
+set fmri(evg316.1) 1
+
+# Higher-level EV value for EV 1 and input 317
+set fmri(evg317.1) 1
+
+# Higher-level EV value for EV 1 and input 318
+set fmri(evg318.1) 1
+
+# Higher-level EV value for EV 1 and input 319
+set fmri(evg319.1) 1
+
+# Higher-level EV value for EV 1 and input 320
+set fmri(evg320.1) 1
+
+# Higher-level EV value for EV 1 and input 321
+set fmri(evg321.1) 1
+
+# Higher-level EV value for EV 1 and input 322
+set fmri(evg322.1) 1
+
+# Higher-level EV value for EV 1 and input 323
+set fmri(evg323.1) 1
+
+# Higher-level EV value for EV 1 and input 324
+set fmri(evg324.1) 1
+
+# Higher-level EV value for EV 1 and input 325
+set fmri(evg325.1) 1
+
+# Higher-level EV value for EV 1 and input 326
+set fmri(evg326.1) 1
+
+# Higher-level EV value for EV 1 and input 327
+set fmri(evg327.1) 1
+
+# Higher-level EV value for EV 1 and input 328
+set fmri(evg328.1) 1
+
+# Higher-level EV value for EV 1 and input 329
+set fmri(evg329.1) 1
+
+# Higher-level EV value for EV 1 and input 330
+set fmri(evg330.1) 1
+
+# Higher-level EV value for EV 1 and input 331
+set fmri(evg331.1) 1
+
+# Higher-level EV value for EV 1 and input 332
+set fmri(evg332.1) 1
+
+# Higher-level EV value for EV 1 and input 333
+set fmri(evg333.1) 1
+
+# Higher-level EV value for EV 1 and input 334
+set fmri(evg334.1) 1
+
+# Higher-level EV value for EV 1 and input 335
+set fmri(evg335.1) 1
+
+# Higher-level EV value for EV 1 and input 336
+set fmri(evg336.1) 1
+
+# Higher-level EV value for EV 1 and input 337
+set fmri(evg337.1) 1
+
+# Higher-level EV value for EV 1 and input 338
+set fmri(evg338.1) 1
+
+# Higher-level EV value for EV 1 and input 339
+set fmri(evg339.1) 1
+
+# Setup Orthogonalisation at higher level?
+set fmri(level2orth) 0
+
+# Group membership for input 1
+set fmri(groupmem.1) 1
+
+# Group membership for input 2
+set fmri(groupmem.2) 1
+
+# Group membership for input 3
+set fmri(groupmem.3) 1
+
+# Group membership for input 4
+set fmri(groupmem.4) 1
+
+# Group membership for input 5
+set fmri(groupmem.5) 1
+
+# Group membership for input 6
+set fmri(groupmem.6) 1
+
+# Group membership for input 7
+set fmri(groupmem.7) 1
+
+# Group membership for input 8
+set fmri(groupmem.8) 1
+
+# Group membership for input 9
+set fmri(groupmem.9) 1
+
+# Group membership for input 10
+set fmri(groupmem.10) 1
+
+# Group membership for input 11
+set fmri(groupmem.11) 1
+
+# Group membership for input 12
+set fmri(groupmem.12) 1
+
+# Group membership for input 13
+set fmri(groupmem.13) 1
+
+# Group membership for input 14
+set fmri(groupmem.14) 1
+
+# Group membership for input 15
+set fmri(groupmem.15) 1
+
+# Group membership for input 16
+set fmri(groupmem.16) 1
+
+# Group membership for input 17
+set fmri(groupmem.17) 1
+
+# Group membership for input 18
+set fmri(groupmem.18) 1
+
+# Group membership for input 19
+set fmri(groupmem.19) 1
+
+# Group membership for input 20
+set fmri(groupmem.20) 1
+
+# Group membership for input 21
+set fmri(groupmem.21) 1
+
+# Group membership for input 22
+set fmri(groupmem.22) 1
+
+# Group membership for input 23
+set fmri(groupmem.23) 1
+
+# Group membership for input 24
+set fmri(groupmem.24) 1
+
+# Group membership for input 25
+set fmri(groupmem.25) 1
+
+# Group membership for input 26
+set fmri(groupmem.26) 1
+
+# Group membership for input 27
+set fmri(groupmem.27) 1
+
+# Group membership for input 28
+set fmri(groupmem.28) 1
+
+# Group membership for input 29
+set fmri(groupmem.29) 1
+
+# Group membership for input 30
+set fmri(groupmem.30) 1
+
+# Group membership for input 31
+set fmri(groupmem.31) 1
+
+# Group membership for input 32
+set fmri(groupmem.32) 1
+
+# Group membership for input 33
+set fmri(groupmem.33) 1
+
+# Group membership for input 34
+set fmri(groupmem.34) 1
+
+# Group membership for input 35
+set fmri(groupmem.35) 1
+
+# Group membership for input 36
+set fmri(groupmem.36) 1
+
+# Group membership for input 37
+set fmri(groupmem.37) 1
+
+# Group membership for input 38
+set fmri(groupmem.38) 1
+
+# Group membership for input 39
+set fmri(groupmem.39) 1
+
+# Group membership for input 40
+set fmri(groupmem.40) 1
+
+# Group membership for input 41
+set fmri(groupmem.41) 1
+
+# Group membership for input 42
+set fmri(groupmem.42) 1
+
+# Group membership for input 43
+set fmri(groupmem.43) 1
+
+# Group membership for input 44
+set fmri(groupmem.44) 1
+
+# Group membership for input 45
+set fmri(groupmem.45) 1
+
+# Group membership for input 46
+set fmri(groupmem.46) 1
+
+# Group membership for input 47
+set fmri(groupmem.47) 1
+
+# Group membership for input 48
+set fmri(groupmem.48) 1
+
+# Group membership for input 49
+set fmri(groupmem.49) 1
+
+# Group membership for input 50
+set fmri(groupmem.50) 1
+
+# Group membership for input 51
+set fmri(groupmem.51) 1
+
+# Group membership for input 52
+set fmri(groupmem.52) 1
+
+# Group membership for input 53
+set fmri(groupmem.53) 1
+
+# Group membership for input 54
+set fmri(groupmem.54) 1
+
+# Group membership for input 55
+set fmri(groupmem.55) 1
+
+# Group membership for input 56
+set fmri(groupmem.56) 1
+
+# Group membership for input 57
+set fmri(groupmem.57) 1
+
+# Group membership for input 58
+set fmri(groupmem.58) 1
+
+# Group membership for input 59
+set fmri(groupmem.59) 1
+
+# Group membership for input 60
+set fmri(groupmem.60) 1
+
+# Group membership for input 61
+set fmri(groupmem.61) 1
+
+# Group membership for input 62
+set fmri(groupmem.62) 1
+
+# Group membership for input 63
+set fmri(groupmem.63) 1
+
+# Group membership for input 64
+set fmri(groupmem.64) 1
+
+# Group membership for input 65
+set fmri(groupmem.65) 1
+
+# Group membership for input 66
+set fmri(groupmem.66) 1
+
+# Group membership for input 67
+set fmri(groupmem.67) 1
+
+# Group membership for input 68
+set fmri(groupmem.68) 1
+
+# Group membership for input 69
+set fmri(groupmem.69) 1
+
+# Group membership for input 70
+set fmri(groupmem.70) 1
+
+# Group membership for input 71
+set fmri(groupmem.71) 1
+
+# Group membership for input 72
+set fmri(groupmem.72) 1
+
+# Group membership for input 73
+set fmri(groupmem.73) 1
+
+# Group membership for input 74
+set fmri(groupmem.74) 1
+
+# Group membership for input 75
+set fmri(groupmem.75) 1
+
+# Group membership for input 76
+set fmri(groupmem.76) 1
+
+# Group membership for input 77
+set fmri(groupmem.77) 1
+
+# Group membership for input 78
+set fmri(groupmem.78) 1
+
+# Group membership for input 79
+set fmri(groupmem.79) 1
+
+# Group membership for input 80
+set fmri(groupmem.80) 1
+
+# Group membership for input 81
+set fmri(groupmem.81) 1
+
+# Group membership for input 82
+set fmri(groupmem.82) 1
+
+# Group membership for input 83
+set fmri(groupmem.83) 1
+
+# Group membership for input 84
+set fmri(groupmem.84) 1
+
+# Group membership for input 85
+set fmri(groupmem.85) 1
+
+# Group membership for input 86
+set fmri(groupmem.86) 1
+
+# Group membership for input 87
+set fmri(groupmem.87) 1
+
+# Group membership for input 88
+set fmri(groupmem.88) 1
+
+# Group membership for input 89
+set fmri(groupmem.89) 1
+
+# Group membership for input 90
+set fmri(groupmem.90) 1
+
+# Group membership for input 91
+set fmri(groupmem.91) 1
+
+# Group membership for input 92
+set fmri(groupmem.92) 1
+
+# Group membership for input 93
+set fmri(groupmem.93) 1
+
+# Group membership for input 94
+set fmri(groupmem.94) 1
+
+# Group membership for input 95
+set fmri(groupmem.95) 1
+
+# Group membership for input 96
+set fmri(groupmem.96) 1
+
+# Group membership for input 97
+set fmri(groupmem.97) 1
+
+# Group membership for input 98
+set fmri(groupmem.98) 1
+
+# Group membership for input 99
+set fmri(groupmem.99) 1
+
+# Group membership for input 100
+set fmri(groupmem.100) 1
+
+# Group membership for input 101
+set fmri(groupmem.101) 1
+
+# Group membership for input 102
+set fmri(groupmem.102) 1
+
+# Group membership for input 103
+set fmri(groupmem.103) 1
+
+# Group membership for input 104
+set fmri(groupmem.104) 1
+
+# Group membership for input 105
+set fmri(groupmem.105) 1
+
+# Group membership for input 106
+set fmri(groupmem.106) 1
+
+# Group membership for input 107
+set fmri(groupmem.107) 1
+
+# Group membership for input 108
+set fmri(groupmem.108) 1
+
+# Group membership for input 109
+set fmri(groupmem.109) 1
+
+# Group membership for input 110
+set fmri(groupmem.110) 1
+
+# Group membership for input 111
+set fmri(groupmem.111) 1
+
+# Group membership for input 112
+set fmri(groupmem.112) 1
+
+# Group membership for input 113
+set fmri(groupmem.113) 1
+
+# Group membership for input 114
+set fmri(groupmem.114) 1
+
+# Group membership for input 115
+set fmri(groupmem.115) 1
+
+# Group membership for input 116
+set fmri(groupmem.116) 1
+
+# Group membership for input 117
+set fmri(groupmem.117) 1
+
+# Group membership for input 118
+set fmri(groupmem.118) 1
+
+# Group membership for input 119
+set fmri(groupmem.119) 1
+
+# Group membership for input 120
+set fmri(groupmem.120) 1
+
+# Group membership for input 121
+set fmri(groupmem.121) 1
+
+# Group membership for input 122
+set fmri(groupmem.122) 1
+
+# Group membership for input 123
+set fmri(groupmem.123) 1
+
+# Group membership for input 124
+set fmri(groupmem.124) 1
+
+# Group membership for input 125
+set fmri(groupmem.125) 1
+
+# Group membership for input 126
+set fmri(groupmem.126) 1
+
+# Group membership for input 127
+set fmri(groupmem.127) 1
+
+# Group membership for input 128
+set fmri(groupmem.128) 1
+
+# Group membership for input 129
+set fmri(groupmem.129) 1
+
+# Group membership for input 130
+set fmri(groupmem.130) 1
+
+# Group membership for input 131
+set fmri(groupmem.131) 1
+
+# Group membership for input 132
+set fmri(groupmem.132) 1
+
+# Group membership for input 133
+set fmri(groupmem.133) 1
+
+# Group membership for input 134
+set fmri(groupmem.134) 1
+
+# Group membership for input 135
+set fmri(groupmem.135) 1
+
+# Group membership for input 136
+set fmri(groupmem.136) 1
+
+# Group membership for input 137
+set fmri(groupmem.137) 1
+
+# Group membership for input 138
+set fmri(groupmem.138) 1
+
+# Group membership for input 139
+set fmri(groupmem.139) 1
+
+# Group membership for input 140
+set fmri(groupmem.140) 1
+
+# Group membership for input 141
+set fmri(groupmem.141) 1
+
+# Group membership for input 142
+set fmri(groupmem.142) 1
+
+# Group membership for input 143
+set fmri(groupmem.143) 1
+
+# Group membership for input 144
+set fmri(groupmem.144) 1
+
+# Group membership for input 145
+set fmri(groupmem.145) 1
+
+# Group membership for input 146
+set fmri(groupmem.146) 1
+
+# Group membership for input 147
+set fmri(groupmem.147) 1
+
+# Group membership for input 148
+set fmri(groupmem.148) 1
+
+# Group membership for input 149
+set fmri(groupmem.149) 1
+
+# Group membership for input 150
+set fmri(groupmem.150) 1
+
+# Group membership for input 151
+set fmri(groupmem.151) 1
+
+# Group membership for input 152
+set fmri(groupmem.152) 1
+
+# Group membership for input 153
+set fmri(groupmem.153) 1
+
+# Group membership for input 154
+set fmri(groupmem.154) 1
+
+# Group membership for input 155
+set fmri(groupmem.155) 1
+
+# Group membership for input 156
+set fmri(groupmem.156) 1
+
+# Group membership for input 157
+set fmri(groupmem.157) 1
+
+# Group membership for input 158
+set fmri(groupmem.158) 1
+
+# Group membership for input 159
+set fmri(groupmem.159) 1
+
+# Group membership for input 160
+set fmri(groupmem.160) 1
+
+# Group membership for input 161
+set fmri(groupmem.161) 1
+
+# Group membership for input 162
+set fmri(groupmem.162) 1
+
+# Group membership for input 163
+set fmri(groupmem.163) 1
+
+# Group membership for input 164
+set fmri(groupmem.164) 1
+
+# Group membership for input 165
+set fmri(groupmem.165) 1
+
+# Group membership for input 166
+set fmri(groupmem.166) 1
+
+# Group membership for input 167
+set fmri(groupmem.167) 1
+
+# Group membership for input 168
+set fmri(groupmem.168) 1
+
+# Group membership for input 169
+set fmri(groupmem.169) 1
+
+# Group membership for input 170
+set fmri(groupmem.170) 1
+
+# Group membership for input 171
+set fmri(groupmem.171) 1
+
+# Group membership for input 172
+set fmri(groupmem.172) 1
+
+# Group membership for input 173
+set fmri(groupmem.173) 1
+
+# Group membership for input 174
+set fmri(groupmem.174) 1
+
+# Group membership for input 175
+set fmri(groupmem.175) 1
+
+# Group membership for input 176
+set fmri(groupmem.176) 1
+
+# Group membership for input 177
+set fmri(groupmem.177) 1
+
+# Group membership for input 178
+set fmri(groupmem.178) 1
+
+# Group membership for input 179
+set fmri(groupmem.179) 1
+
+# Group membership for input 180
+set fmri(groupmem.180) 1
+
+# Group membership for input 181
+set fmri(groupmem.181) 1
+
+# Group membership for input 182
+set fmri(groupmem.182) 1
+
+# Group membership for input 183
+set fmri(groupmem.183) 1
+
+# Group membership for input 184
+set fmri(groupmem.184) 1
+
+# Group membership for input 185
+set fmri(groupmem.185) 1
+
+# Group membership for input 186
+set fmri(groupmem.186) 1
+
+# Group membership for input 187
+set fmri(groupmem.187) 1
+
+# Group membership for input 188
+set fmri(groupmem.188) 1
+
+# Group membership for input 189
+set fmri(groupmem.189) 1
+
+# Group membership for input 190
+set fmri(groupmem.190) 1
+
+# Group membership for input 191
+set fmri(groupmem.191) 1
+
+# Group membership for input 192
+set fmri(groupmem.192) 1
+
+# Group membership for input 193
+set fmri(groupmem.193) 1
+
+# Group membership for input 194
+set fmri(groupmem.194) 1
+
+# Group membership for input 195
+set fmri(groupmem.195) 1
+
+# Group membership for input 196
+set fmri(groupmem.196) 1
+
+# Group membership for input 197
+set fmri(groupmem.197) 1
+
+# Group membership for input 198
+set fmri(groupmem.198) 1
+
+# Group membership for input 199
+set fmri(groupmem.199) 1
+
+# Group membership for input 200
+set fmri(groupmem.200) 1
+
+# Group membership for input 201
+set fmri(groupmem.201) 1
+
+# Group membership for input 202
+set fmri(groupmem.202) 1
+
+# Group membership for input 203
+set fmri(groupmem.203) 1
+
+# Group membership for input 204
+set fmri(groupmem.204) 1
+
+# Group membership for input 205
+set fmri(groupmem.205) 1
+
+# Group membership for input 206
+set fmri(groupmem.206) 1
+
+# Group membership for input 207
+set fmri(groupmem.207) 1
+
+# Group membership for input 208
+set fmri(groupmem.208) 1
+
+# Group membership for input 209
+set fmri(groupmem.209) 1
+
+# Group membership for input 210
+set fmri(groupmem.210) 1
+
+# Group membership for input 211
+set fmri(groupmem.211) 1
+
+# Group membership for input 212
+set fmri(groupmem.212) 1
+
+# Group membership for input 213
+set fmri(groupmem.213) 1
+
+# Group membership for input 214
+set fmri(groupmem.214) 1
+
+# Group membership for input 215
+set fmri(groupmem.215) 1
+
+# Group membership for input 216
+set fmri(groupmem.216) 1
+
+# Group membership for input 217
+set fmri(groupmem.217) 1
+
+# Group membership for input 218
+set fmri(groupmem.218) 1
+
+# Group membership for input 219
+set fmri(groupmem.219) 1
+
+# Group membership for input 220
+set fmri(groupmem.220) 1
+
+# Group membership for input 221
+set fmri(groupmem.221) 1
+
+# Group membership for input 222
+set fmri(groupmem.222) 1
+
+# Group membership for input 223
+set fmri(groupmem.223) 1
+
+# Group membership for input 224
+set fmri(groupmem.224) 1
+
+# Group membership for input 225
+set fmri(groupmem.225) 1
+
+# Group membership for input 226
+set fmri(groupmem.226) 1
+
+# Group membership for input 227
+set fmri(groupmem.227) 1
+
+# Group membership for input 228
+set fmri(groupmem.228) 1
+
+# Group membership for input 229
+set fmri(groupmem.229) 1
+
+# Group membership for input 230
+set fmri(groupmem.230) 1
+
+# Group membership for input 231
+set fmri(groupmem.231) 1
+
+# Group membership for input 232
+set fmri(groupmem.232) 1
+
+# Group membership for input 233
+set fmri(groupmem.233) 1
+
+# Group membership for input 234
+set fmri(groupmem.234) 1
+
+# Group membership for input 235
+set fmri(groupmem.235) 1
+
+# Group membership for input 236
+set fmri(groupmem.236) 1
+
+# Group membership for input 237
+set fmri(groupmem.237) 1
+
+# Group membership for input 238
+set fmri(groupmem.238) 1
+
+# Group membership for input 239
+set fmri(groupmem.239) 1
+
+# Group membership for input 240
+set fmri(groupmem.240) 1
+
+# Group membership for input 241
+set fmri(groupmem.241) 1
+
+# Group membership for input 242
+set fmri(groupmem.242) 1
+
+# Group membership for input 243
+set fmri(groupmem.243) 1
+
+# Group membership for input 244
+set fmri(groupmem.244) 1
+
+# Group membership for input 245
+set fmri(groupmem.245) 1
+
+# Group membership for input 246
+set fmri(groupmem.246) 1
+
+# Group membership for input 247
+set fmri(groupmem.247) 1
+
+# Group membership for input 248
+set fmri(groupmem.248) 1
+
+# Group membership for input 249
+set fmri(groupmem.249) 1
+
+# Group membership for input 250
+set fmri(groupmem.250) 1
+
+# Group membership for input 251
+set fmri(groupmem.251) 1
+
+# Group membership for input 252
+set fmri(groupmem.252) 1
+
+# Group membership for input 253
+set fmri(groupmem.253) 1
+
+# Group membership for input 254
+set fmri(groupmem.254) 1
+
+# Group membership for input 255
+set fmri(groupmem.255) 1
+
+# Group membership for input 256
+set fmri(groupmem.256) 1
+
+# Group membership for input 257
+set fmri(groupmem.257) 1
+
+# Group membership for input 258
+set fmri(groupmem.258) 1
+
+# Group membership for input 259
+set fmri(groupmem.259) 1
+
+# Group membership for input 260
+set fmri(groupmem.260) 1
+
+# Group membership for input 261
+set fmri(groupmem.261) 1
+
+# Group membership for input 262
+set fmri(groupmem.262) 1
+
+# Group membership for input 263
+set fmri(groupmem.263) 1
+
+# Group membership for input 264
+set fmri(groupmem.264) 1
+
+# Group membership for input 265
+set fmri(groupmem.265) 1
+
+# Group membership for input 266
+set fmri(groupmem.266) 1
+
+# Group membership for input 267
+set fmri(groupmem.267) 1
+
+# Group membership for input 268
+set fmri(groupmem.268) 1
+
+# Group membership for input 269
+set fmri(groupmem.269) 1
+
+# Group membership for input 270
+set fmri(groupmem.270) 1
+
+# Group membership for input 271
+set fmri(groupmem.271) 1
+
+# Group membership for input 272
+set fmri(groupmem.272) 1
+
+# Group membership for input 273
+set fmri(groupmem.273) 1
+
+# Group membership for input 274
+set fmri(groupmem.274) 1
+
+# Group membership for input 275
+set fmri(groupmem.275) 1
+
+# Group membership for input 276
+set fmri(groupmem.276) 1
+
+# Group membership for input 277
+set fmri(groupmem.277) 1
+
+# Group membership for input 278
+set fmri(groupmem.278) 1
+
+# Group membership for input 279
+set fmri(groupmem.279) 1
+
+# Group membership for input 280
+set fmri(groupmem.280) 1
+
+# Group membership for input 281
+set fmri(groupmem.281) 1
+
+# Group membership for input 282
+set fmri(groupmem.282) 1
+
+# Group membership for input 283
+set fmri(groupmem.283) 1
+
+# Group membership for input 284
+set fmri(groupmem.284) 1
+
+# Group membership for input 285
+set fmri(groupmem.285) 1
+
+# Group membership for input 286
+set fmri(groupmem.286) 1
+
+# Group membership for input 287
+set fmri(groupmem.287) 1
+
+# Group membership for input 288
+set fmri(groupmem.288) 1
+
+# Group membership for input 289
+set fmri(groupmem.289) 1
+
+# Group membership for input 290
+set fmri(groupmem.290) 1
+
+# Group membership for input 291
+set fmri(groupmem.291) 1
+
+# Group membership for input 292
+set fmri(groupmem.292) 1
+
+# Group membership for input 293
+set fmri(groupmem.293) 1
+
+# Group membership for input 294
+set fmri(groupmem.294) 1
+
+# Group membership for input 295
+set fmri(groupmem.295) 1
+
+# Group membership for input 296
+set fmri(groupmem.296) 1
+
+# Group membership for input 297
+set fmri(groupmem.297) 1
+
+# Group membership for input 298
+set fmri(groupmem.298) 1
+
+# Group membership for input 299
+set fmri(groupmem.299) 1
+
+# Group membership for input 300
+set fmri(groupmem.300) 1
+
+# Group membership for input 301
+set fmri(groupmem.301) 1
+
+# Group membership for input 302
+set fmri(groupmem.302) 1
+
+# Group membership for input 303
+set fmri(groupmem.303) 1
+
+# Group membership for input 304
+set fmri(groupmem.304) 1
+
+# Group membership for input 305
+set fmri(groupmem.305) 1
+
+# Group membership for input 306
+set fmri(groupmem.306) 1
+
+# Group membership for input 307
+set fmri(groupmem.307) 1
+
+# Group membership for input 308
+set fmri(groupmem.308) 1
+
+# Group membership for input 309
+set fmri(groupmem.309) 1
+
+# Group membership for input 310
+set fmri(groupmem.310) 1
+
+# Group membership for input 311
+set fmri(groupmem.311) 1
+
+# Group membership for input 312
+set fmri(groupmem.312) 1
+
+# Group membership for input 313
+set fmri(groupmem.313) 1
+
+# Group membership for input 314
+set fmri(groupmem.314) 1
+
+# Group membership for input 315
+set fmri(groupmem.315) 1
+
+# Group membership for input 316
+set fmri(groupmem.316) 1
+
+# Group membership for input 317
+set fmri(groupmem.317) 1
+
+# Group membership for input 318
+set fmri(groupmem.318) 1
+
+# Group membership for input 319
+set fmri(groupmem.319) 1
+
+# Group membership for input 320
+set fmri(groupmem.320) 1
+
+# Group membership for input 321
+set fmri(groupmem.321) 1
+
+# Group membership for input 322
+set fmri(groupmem.322) 1
+
+# Group membership for input 323
+set fmri(groupmem.323) 1
+
+# Group membership for input 324
+set fmri(groupmem.324) 1
+
+# Group membership for input 325
+set fmri(groupmem.325) 1
+
+# Group membership for input 326
+set fmri(groupmem.326) 1
+
+# Group membership for input 327
+set fmri(groupmem.327) 1
+
+# Group membership for input 328
+set fmri(groupmem.328) 1
+
+# Group membership for input 329
+set fmri(groupmem.329) 1
+
+# Group membership for input 330
+set fmri(groupmem.330) 1
+
+# Group membership for input 331
+set fmri(groupmem.331) 1
+
+# Group membership for input 332
+set fmri(groupmem.332) 1
+
+# Group membership for input 333
+set fmri(groupmem.333) 1
+
+# Group membership for input 334
+set fmri(groupmem.334) 1
+
+# Group membership for input 335
+set fmri(groupmem.335) 1
+
+# Group membership for input 336
+set fmri(groupmem.336) 1
+
+# Group membership for input 337
+set fmri(groupmem.337) 1
+
+# Group membership for input 338
+set fmri(groupmem.338) 1
+
+# Group membership for input 339
+set fmri(groupmem.339) 1
+
+# Contrast & F-tests mode
+# real : control real EVs
+# orig : control original EVs
+set fmri(con_mode_old) real
+set fmri(con_mode) real
+
+# Display images for contrast_real 1
+set fmri(conpic_real.1) 1
+
+# Title for contrast_real 1
+set fmri(conname_real.1) "Group_pos"
+
+# Real contrast_real vector 1 element 1
+set fmri(con_real1.1) 1
+
+# Display images for contrast_real 2
+set fmri(conpic_real.2) 1
+
+# Title for contrast_real 2
+set fmri(conname_real.2) "Group_neg"
+
+# Real contrast_real vector 2 element 1
+set fmri(con_real2.1) -1.0
+
+# Contrast masking - use >0 instead of thresholding?
+set fmri(conmask_zerothresh_yn) 0
+
+# Mask real contrast/F-test 1 with real contrast/F-test 2?
+set fmri(conmask1_2) 0
+
+# Mask real contrast/F-test 2 with real contrast/F-test 1?
+set fmri(conmask2_1) 0
+
+# Do contrast masking at all?
+set fmri(conmask1_1) 0
+
+##########################################################
+# Now options that don't appear in the GUI
+
+# Alternative (to BETting) mask image
+set fmri(alternative_mask) ""
+
+# Initial structural space registration initialisation transform
+set fmri(init_initial_highres) ""
+
+# Structural space registration initialisation transform
+set fmri(init_highres) ""
+
+# Standard space registration initialisation transform
+set fmri(init_standard) ""
+
+# For full FEAT analysis: overwrite existing .feat output dir?
+set fmri(overwrite_yn) 0

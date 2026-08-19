@@ -1,0 +1,5 @@
+nohup: ignoring input
+/ZPOOL/data/projects/rf1-sra-ugr/code/L3stats.sh
+/ZPOOL/data/projects/rf1-sra-ugr/code/L3stats.sh 11 offer-unfairness_pmod act
+/ZPOOL/data/projects/rf1-sra-ugr/code/L3stats.sh
+/ZPOOL/data/projects/rf1-sra-ugr/code/L3stats.sh 12 social-nonsocial_pmod act
