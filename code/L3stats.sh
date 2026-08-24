@@ -28,7 +28,7 @@ type=${REPLACEME} # For output template
 # Variables that change per analysis. Check carefully! 
 covariate=ones
 
-N=339 # update with total n after exclusions
+N=304 # update with total n after exclusions
 
 if [[ $analysis == "act" ]]; then
 	template=L3_task-ugr_model-3_type-act_group-${covariate}_n${N}_flame1.fsf 
