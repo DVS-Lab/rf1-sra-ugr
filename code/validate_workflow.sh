@@ -12,7 +12,7 @@ shell_scripts=(
     validate_workflow.sh
 )
 python_scripts=(
-    build_L1_manifest.py build_L2_manifest.py gen_model3_evs.py ugr_qc.py
+    audit_workflow.py build_L1_manifest.py build_L2_manifest.py gen_model3_evs.py ugr_qc.py
 )
 
 for script in "${shell_scripts[@]}"; do
@@ -32,7 +32,7 @@ PYTHONPYCACHEPREFIX="${TMPDIR:-/tmp}/rf1-sra-ugr-pycache" \
 echo "PASS: Python syntax"
 
 production=(
-    project_config.sh build_L1_manifest.py build_L2_manifest.py gen_model3_evs.py ugr_qc.py
+    project_config.sh audit_workflow.py build_L1_manifest.py build_L2_manifest.py gen_model3_evs.py ugr_qc.py
     run_gen3colfiles.sh L1stats.sh run_L1stats.sh L2stats.sh run_L2stats.sh
 )
 if grep -En 'rf1-sra-data|rf1-sra/stimuli|_raw\.csv|fmriprep-24|confounds_tedana-24' \

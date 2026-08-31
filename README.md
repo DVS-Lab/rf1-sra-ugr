@@ -64,6 +64,14 @@ fi
 
 mkdir -p logs/runlists logs/EV-current logs/L1-current
 
+# Rebuild a read-only audit across every visible UGR session. Detailed TSVs
+# are ignored locally; --include-full-log preserves the summary in Git.
+bash code/run_logged.sh --label workflow-audit --include-full-log -- \
+  python3 code/audit_workflow.py \
+    --sessions all \
+    --seed dACC \
+    --output-dir logs/audits/current
+
 python3 code/build_L1_manifest.py \
   --sessions 01 \
   --output logs/runlists/L1-ready.tsv \

@@ -16,6 +16,17 @@ run_L2stats.sh → L2stats.sh
 
 All active analysis code is model 3, session-aware, and BIDS/derivatives-only.
 
+## `audit_workflow.py`
+
+- **Status:** Production read-only completeness audit.
+- **Purpose:** Discover every visible UGR subject/session/run and report upstream inputs, EVs, activation, seed PPI, and eligible L2 completion in one pass.
+- **Inputs:** Canonical BIDS events, fMRIPrep BOLD, production confounds, local FSL derivatives, session selection, and seed name.
+- **Outputs:** A concise summary plus detailed and wrapper-compatible todo TSVs under `logs/audits/`.
+- **Typical command:** `python3 code/audit_workflow.py --sessions all --seed dACC --output-dir logs/audits/current`.
+- **Called by / calls:** Called directly or through `run_logged.sh`; does not invoke FEAT or modify derivatives.
+- **Scientific role:** None; it enforces the existing model-3 workflow contracts and identifies missing work.
+- **Important assumptions:** L2 requires runs 1 and 2; activation has 17 copes and seed PPI has 18.
+
 ## `project_config.sh`
 
 - **Status:** Production shared configuration.
