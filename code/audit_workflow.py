@@ -343,6 +343,11 @@ def main() -> int:
     ev_complete = sum(states[unit][0] == "complete" for unit in input_ready)
     act_complete = sum(states[unit][1] == "complete" for unit in input_ready)
     ppi_complete = sum(states[unit][2] == "complete" for unit in input_ready)
+    act_blocked = sum(states[unit][0] != "complete" for unit in input_ready)
+    ppi_blocked = sum(
+        states[unit][0] != "complete" or states[unit][1] != "complete"
+        for unit in input_ready
+    )
     discovered_sessions = sorted({unit.session for unit in ordered_units})
     lines = [
         "UGR WORKFLOW AUDIT",
@@ -354,13 +359,17 @@ def main() -> int:
         f"EV todo: {len(ev_todo)}",
         f"L1 activation complete: {act_complete}",
         f"L1 activation todo: {len(act_todo)}",
+        f"L1 activation blocked by EVs: {act_blocked}",
         f"L1 {ppi_type} complete: {ppi_complete}",
         f"L1 {ppi_type} todo: {len(ppi_todo)}",
+        f"L1 {ppi_type} blocked by EVs/activation: {ppi_blocked}",
         f"Input-ready subject-sessions with runs 1 and 2: {paired}",
         f"L2 activation complete/eligible: {act_l2_complete}/{act_l2_eligible}",
         f"L2 activation todo: {len(l2_act_todo)}",
+        f"L2 activation blocked by L1: {paired - act_l2_eligible}",
         f"L2 {ppi_type} complete/eligible: {ppi_l2_complete}/{ppi_l2_eligible}",
         f"L2 {ppi_type} todo: {len(l2_ppi_todo)}",
+        f"L2 {ppi_type} blocked by L1: {paired - ppi_l2_eligible}",
         f"Detailed reports: {out.resolve()}",
     ]
     summary = "\n".join(lines) + "\n"
