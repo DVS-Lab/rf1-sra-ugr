@@ -130,6 +130,28 @@ class NetworkPpiTemplateTests(unittest.TestCase):
                 self.assertEqual(self.nppi[f"interactions{interaction_ev}.{column}"], "0")
                 self.assertEqual(self.nppi[f"interactionsd{interaction_ev}.{column}"], "0")
 
+    def test_interaction_zeroing_matches_regressor_semantics(self) -> None:
+        # FEAT interaction zeroing codes: 0 = Min, 1 = Centre, 2 = Mean.
+        # Ordinary task regressors use Min; signed parametric modulators use
+        # Centre; the brain-derived physiological/network signal uses Mean.
+        expected_psychological_zeroing = (0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
+        for template, interaction_first in ((self.ppi, 13), (self.nppi, 22)):
+            for psychological_ev, expected_zeroing in enumerate(
+                expected_psychological_zeroing, start=1
+            ):
+                interaction_ev = interaction_first + psychological_ev - 1
+                selected = {
+                    column
+                    for column in range(1, interaction_ev)
+                    if template[f"interactions{interaction_ev}.{column}"] == "1"
+                }
+                self.assertEqual(selected, {psychological_ev, 12})
+                self.assertEqual(
+                    template[f"interactionsd{interaction_ev}.{psychological_ev}"],
+                    str(expected_zeroing),
+                )
+                self.assertEqual(template[f"interactionsd{interaction_ev}.12"], "2")
+
     def test_orthogonalisation_matrix_is_complete_and_zero(self) -> None:
         keys = {
             f"ortho{row}.{column}"

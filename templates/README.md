@@ -94,6 +94,12 @@ convolution (`convolve12 = 0`). All interaction EVs also specify no additional
 convolution; FEAT forms them from the already convolved psychological EV and
 the unconvolved physiological EV.
 
+For interaction zeroing, FEAT stores `Min`, `Centre`, and `Mean` as 0, 1, and
+2, respectively. The ordinary/constant task EVs (1, 3, 5, 7, 9, and 11) use
+`Min`; the signed parametric modulators (2, 4, 6, 8, and 10) use `Centre`; and
+the physiological seed series (EV 12) uses `Mean`. This exact pattern is tested
+across all 11 seed-PPI interactions.
+
 ## Network PPI
 
 `L1_task-ugr_model-3_type-nppi.fsf` is a reproducible expansion of the
@@ -118,7 +124,9 @@ parity with the established model-3 seed-PPI template.
 All ten spatially regressed network time courses—target plus nine nuisance
 networks—are brain-derived signals with one value per volume and
 `convolve = 0`. None is HRF-convolved. The network-PPI interaction EVs likewise
-specify no additional convolution.
+specify no additional convolution. Their psychological `Min`/`Centre` settings
+and target-network `Mean` setting exactly match the corresponding seed-PPI
+interactions.
 
 `L1stats.sh` estimates all ten network time courses together in one spatial
 regression, rather than fitting ten separate single-network regressions. `dmn`
