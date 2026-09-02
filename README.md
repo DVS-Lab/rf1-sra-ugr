@@ -18,7 +18,7 @@ rf1-sra-linux2
 rf1-sra-ugr
   canonical events → model-3 EVs
           ↓
-  L1 activation / seed PPI
+  L1 activation / seed PPI / network PPI
           ↓
   L2 fixed effects across runs 1 + 2
 ```
@@ -101,8 +101,9 @@ bash code/run_L1stats.sh \
   --ppi 0 --jobs 4 --log-dir logs/L1-pilot
 ```
 
-After reviewing the pilot, run activation for the approved manifest. Seed PPI
-must follow activation because it requires each activation FEAT mask:
+After reviewing the pilot, run activation for the approved manifest. Seed and
+network PPI must follow activation because they require each activation FEAT
+mask:
 
 ```bash
 bash code/run_L1stats.sh \
@@ -112,7 +113,22 @@ bash code/run_L1stats.sh \
 bash code/run_L1stats.sh \
   --manifest logs/runlists/L1-ready.tsv \
   --ppi pTPJ --jobs 20 --log-dir logs/L1-PPI-pTPJ-current
+
+# Network-PPI pilot: historical network 3 = DMN, with all ten network maps
+# estimated together and the other nine retained as nuisance time courses.
+bash code/run_L1stats.sh \
+  --manifest logs/runlists/L1-pilot.tsv \
+  --ppi dmn --jobs 2 --render-only --log-dir logs/L1-nPPI-DMN-render
 ```
+
+The active network maps default to `masks/nan_rPNAS_2mm_net0000.nii.gz`
+through `net0009.nii.gz`. Override their directory with
+`NPPI_NETWORK_MAPS_ROOT` only when deliberately validating an alternative
+map set. See [masks/README.md](masks/README.md) for the current provenance
+boundary and provisional DMN/ECN index assignments.
+
+After a network-PPI run, select it in the workflow audit with
+`--ppi-type nppi-dmn` or `--ppi-type nppi-ecn`.
 
 Build and dry-run L2 after both UGR runs are complete:
 
@@ -140,8 +156,9 @@ untracked.
 
 An outside researcher needs this repository, canonical BIDS UGR events,
 fMRIPrep derivatives, analysis confounds, Python 3, and FSL. Override paths with
-`RF1_SRA_UPSTREAM_ROOT`, `BIDS_ROOT`, `FMRIPREP_ROOT`, `CONFOUNDS_ROOT`, and
-`FSL_DERIVATIVES_ROOT`. No active code imports or sources `rf1-sra-linux2`.
+`RF1_SRA_UPSTREAM_ROOT`, `BIDS_ROOT`, `FMRIPREP_ROOT`, `CONFOUNDS_ROOT`,
+`FSL_DERIVATIVES_ROOT`, and optionally `NPPI_NETWORK_MAPS_ROOT`. No active code
+imports or sources `rf1-sra-linux2`.
 
 The manifest discovers runs from BIDS rather than assuming that all participants
 have both. Session 01 is the default historical scope; request session 02
@@ -152,8 +169,8 @@ explicitly with `--sessions 01,02`.
 | Path | Purpose |
 | --- | --- |
 | `code/` | Model-3 EV generation, readiness manifests, L1/L2 workers, wrappers, validation, and workflow provenance. |
-| `templates/` | The sole active model-3 activation and seed-PPI FEAT templates. |
-| `masks/` | Tracked seed masks used by optional seed-PPI analyses. |
+| `templates/` | Active model-3 activation, seed-PPI, and generated network-PPI FEAT templates. |
+| `masks/` | Tracked seed masks and continuous network maps used by PPI analyses. |
 | `derivatives/` | Documentation and ignored local analysis products. |
 | `tests/` | Synthetic canonical-event, timing, validation, rendering, and L1→L2 contract tests. |
 

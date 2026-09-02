@@ -12,7 +12,8 @@ shell_scripts=(
     validate_workflow.sh
 )
 python_scripts=(
-    audit_workflow.py build_L1_manifest.py build_L2_manifest.py gen_model3_evs.py ugr_qc.py
+    audit_workflow.py build_L1_manifest.py build_L2_manifest.py build_model3_nppi_template.py
+    gen_model3_evs.py ugr_qc.py
 )
 
 for script in "${shell_scripts[@]}"; do
@@ -51,6 +52,7 @@ echo "PASS: model 3 is the only active model"
 
 act_template="$PROJECT_ROOT/templates/L1_task-ugr_model-3_type-act.fsf"
 ppi_template="$PROJECT_ROOT/templates/L1_task-ugr_model-3_type-ppi.fsf"
+nppi_template="$PROJECT_ROOT/templates/L1_task-ugr_model-3_type-nppi.fsf"
 [[ "$(grep -c '^set fmri(evtitle[0-9]\+)' "$act_template")" -eq 11 ]]
 [[ "$(grep -c '^set fmri(conname_real\.[0-9]\+)' "$act_template")" -eq 17 ]]
 [[ "$(grep -c '^set fmri(custom[0-9]\+)' "$act_template")" -eq 11 ]]
@@ -59,7 +61,16 @@ echo "PASS: activation template has 11 EVs, 17 contrasts, and no FEAT orthogonal
 
 [[ "$(grep -c '^set fmri(convolve11) 3' "$act_template")" -eq 1 ]]
 [[ "$(grep -c '^set fmri(convolve11) 3' "$ppi_template")" -eq 1 ]]
-echo "PASS: missed-trial EV uses task convolution in activation and PPI templates"
+[[ "$(grep -c '^set fmri(convolve11) 3' "$nppi_template")" -eq 1 ]]
+echo "PASS: missed-trial EV uses task convolution in activation, seed-PPI, and network-PPI templates"
+
+python3 "$SCRIPT_DIR/build_model3_nppi_template.py" \
+    --source "$ppi_template" --output "$nppi_template" --check
+[[ "$(grep -c '^set fmri(evtitle[0-9]\+)' "$nppi_template")" -eq 32 ]]
+[[ "$(grep -c '^set fmri(conname_real\.[0-9]\+)' "$nppi_template")" -eq 18 ]]
+[[ "$(grep -c '^set fmri(custom[0-9]\+)' "$nppi_template")" -eq 21 ]]
+[[ "$(grep -c '^set fmri(ortho[0-9]\+\.[0-9]\+) 1' "$nppi_template" || true)" -eq 0 ]]
+echo "PASS: network-PPI template is reproducible with 32 EVs, 18 contrasts, and no FEAT orthogonalization"
 
 for template in "$PROJECT_ROOT"/templates/*.fsf; do
     if [[ "$(grep -c '^set fmri(featwatcher_yn) 0$' "$template")" -ne 1 ]]; then

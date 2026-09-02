@@ -10,9 +10,13 @@ from pathlib import Path
 
 
 def normalize_type(value: str) -> str:
-    if value == "act" or (value.startswith("ppi_seed-") and len(value) > len("ppi_seed-")):
+    if (
+        value == "act"
+        or (value.startswith("ppi_seed-") and len(value) > len("ppi_seed-"))
+        or value in {"nppi-dmn", "nppi-ecn"}
+    ):
         return value
-    raise argparse.ArgumentTypeError("type must be act or ppi_seed-<seed>")
+    raise argparse.ArgumentTypeError("type must be act, ppi_seed-<seed>, or nppi-<dmn|ecn>")
 
 
 def l1_path(root: Path, subject: str, session: str, run: str, analysis_type: str) -> Path:

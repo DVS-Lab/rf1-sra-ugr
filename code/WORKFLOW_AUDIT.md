@@ -27,6 +27,22 @@ downstream analysis repository.
 | swap files, `.goutputstream-*`, checkpoints, lock files, `.asv` autosaves | TEMPORARY/JUNK | Removed and ignored. |
 | `nilearn`, `cooper-test.txt` | UNCERTAIN / TEMPORARY | Empty or unexplained working artifacts; removed. |
 
+## Network-PPI reintroduction (2026-09-02)
+
+The initial cleanup correctly withheld nPPI because no validated model-3
+template was active. After a focused reconstruction request, network PPI was
+reintroduced without restoring the model-2 task model. The current template is
+generated from the authoritative model-3 seed-PPI template, expanded with the
+historical ten-network architecture, and protected by structural and synthetic
+tests.
+
+The continuous network sources were recovered from revision `7ce32fd` and
+resampled to the production modal grid with trilinear interpolation. Binary
+57 × 70 × 54 historical copies were rejected because the published method
+uses continuous maps. The inherited assignments DMN = map 3 and ECN = map 7
+remain explicitly provisional pending confirmation from the original network
+distribution documentation.
+
 ## `rf1-norms`
 
 | Material | Classification | Use here |

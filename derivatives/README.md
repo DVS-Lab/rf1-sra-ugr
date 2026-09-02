@@ -18,6 +18,6 @@ derivatives/fsl/
       ts_task-ugr_...txt
 ```
 
-The source templates, code, tests, documentation, and seed masks are tracked;
-generated EVs, rendered per-subject FSFs, physiological series, FEAT/GFEAT
-trees, and other large derivatives are ignored.
+The source templates, code, tests, documentation, seed masks, and network maps
+are tracked; generated EVs, rendered per-subject FSFs, physiological/network
+series, FEAT/GFEAT trees, and other large derivatives are ignored.

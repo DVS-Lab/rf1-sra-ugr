@@ -142,6 +142,40 @@ class WorkflowAuditTests(unittest.TestCase):
         l2_todo = self.read_tsv(self.output / "L2-act-todo.tsv")
         self.assertEqual(l2_todo, [{"subject": "10001", "session": "01"}])
 
+    def test_audit_accepts_network_ppi_family(self) -> None:
+        unit = Unit("10001", "01", "1")
+        self.prepare_inputs(unit)
+        self.prepare_evs(unit)
+        self.prepare_l1(unit, "act", 17)
+        output = self.base / "audit-nppi"
+        result = subprocess.run(
+            [
+                sys.executable,
+                "code/audit_workflow.py",
+                "--bids-root",
+                str(self.bids),
+                "--fmriprep-root",
+                str(self.fmriprep),
+                "--confounds-root",
+                str(self.confounds),
+                "--fsl-root",
+                str(self.fsl),
+                "--ppi-type",
+                "nppi-dmn",
+                "--output-dir",
+                str(output),
+            ],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+        self.assertIn("L1 nppi-dmn todo: 1", result.stdout)
+        self.assertEqual(
+            self.read_tsv(output / "L1-nppi-dmn-todo.tsv"),
+            [{"subject": "10001", "session": "01", "run": "1"}],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

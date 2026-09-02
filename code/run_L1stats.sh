@@ -15,7 +15,7 @@ Options:
   --subject ID      Run one participant/run instead of a manifest
   --session ID      Session for --subject (default: 01)
   --run ID          Run for --subject (default: 1)
-  --ppi VALUE       0/act or seed name (default: 0)
+  --ppi VALUE       0/act, seed name, or dmn/ecn network (default: 0)
   --jobs N          Maximum concurrent FEAT jobs (default: 20)
   --dry-run         Validate inputs and print each plan
   --render-only     Render .fsf files without running FEAT

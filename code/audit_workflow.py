@@ -70,6 +70,15 @@ def parse_sessions(value: str) -> set[str] | None:
     return sessions
 
 
+def parse_ppi_type(value: str) -> str:
+    if (value.startswith("ppi_seed-") and len(value) > len("ppi_seed-")) or value in {
+        "nppi-dmn",
+        "nppi-ecn",
+    }:
+        return value
+    raise argparse.ArgumentTypeError("PPI type must be ppi_seed-<seed>, nppi-dmn, or nppi-ecn")
+
+
 def discover(root: Path, pattern: str, matcher: re.Pattern[str]) -> set[Unit]:
     units: set[Unit] = set()
     if not root.is_dir():
@@ -218,7 +227,13 @@ def parse_args() -> argparse.Namespace:
         default=Path(os.environ.get("FSL_DERIVATIVES_ROOT", root / "derivatives" / "fsl")),
     )
     parser.add_argument("--sessions", default="all")
-    parser.add_argument("--seed", default="dACC")
+    ppi_group = parser.add_mutually_exclusive_group()
+    ppi_group.add_argument("--seed", default="dACC")
+    ppi_group.add_argument(
+        "--ppi-type",
+        type=parse_ppi_type,
+        help="audit this exact PPI family instead of ppi_seed-<seed>",
+    )
     parser.add_argument("--output-dir", type=Path, default=root / "logs" / "audits" / "current")
     return parser.parse_args()
 
@@ -226,7 +241,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     sessions = parse_sessions(args.sessions)
-    ppi_type = f"ppi_seed-{args.seed}"
+    ppi_type = args.ppi_type or f"ppi_seed-{args.seed}"
 
     event_units = discover(
         args.bids_root, "sub-*/ses-*/func/*task-ugr_run-*_events.tsv", EVENT_RE

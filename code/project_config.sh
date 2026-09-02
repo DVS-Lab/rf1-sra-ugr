@@ -9,6 +9,7 @@ BIDS_ROOT="${BIDS_ROOT:-${UPSTREAM_ROOT}/bids}"
 FMRIPREP_ROOT="${FMRIPREP_ROOT:-${UPSTREAM_ROOT}/derivatives/fmriprep}"
 CONFOUNDS_ROOT="${CONFOUNDS_ROOT:-${UPSTREAM_ROOT}/derivatives/fsl/confounds_tedana}"
 FSL_DERIVATIVES_ROOT="${FSL_DERIVATIVES_ROOT:-${PROJECT_ROOT}/derivatives/fsl}"
+NPPI_NETWORK_MAPS_ROOT="${NPPI_NETWORK_MAPS_ROOT:-${PROJECT_ROOT}/masks}"
 
 normalize_subject() {
     printf '%s\n' "${1#sub-}"
@@ -21,6 +22,8 @@ normalize_session() {
 analysis_type_from_ppi() {
     case "$1" in
         0|act) printf '%s\n' act ;;
+        dmn|ecn) printf 'nppi-%s\n' "$1" ;;
+        nppi-dmn|nppi-ecn) printf '%s\n' "$1" ;;
         *) printf 'ppi_seed-%s\n' "$1" ;;
     esac
 }

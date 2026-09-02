@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "code"))
 
 from build_L1_manifest import build_manifest, paths_for
-from build_L2_manifest import l1_path
+from build_L2_manifest import l1_path, normalize_type
 
 
 class ManifestTests(unittest.TestCase):
@@ -42,6 +42,7 @@ class ManifestTests(unittest.TestCase):
             / "ses-02"
             / "L1_task-ugr_ses-02_model-3_type-ppi_seed-pTPJ_run-2_sm-5.feat",
         )
+        self.assertEqual(normalize_type("nppi-dmn"), "nppi-dmn")
 
 
 if __name__ == "__main__":

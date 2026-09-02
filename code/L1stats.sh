@@ -12,7 +12,8 @@ usage() {
     cat <<'EOF'
 Usage: L1stats.sh SUBJECT RUN PPI [options]
 
-PPI is 0/act for activation or a seed name matching masks/seed-<name>.nii.gz.
+PPI is 0/act for activation, a seed name matching masks/seed-<name>.nii.gz,
+or dmn/ecn for network PPI using the ten tracked rPNAS network maps.
 
 Options:
   --session ID       BIDS session (default: 01)
@@ -78,13 +79,47 @@ done
 case "$type" in
     act) template="${PROJECT_ROOT}/templates/L1_task-ugr_model-3_type-act.fsf" ;;
     ppi_seed-*) template="${PROJECT_ROOT}/templates/L1_task-ugr_model-3_type-ppi.fsf" ;;
+    nppi-*) template="${PROJECT_ROOT}/templates/L1_task-ugr_model-3_type-nppi.fsf" ;;
     *) echo "ERROR: unsupported analysis type: $type" >&2; exit 2 ;;
 esac
 [[ -f "$template" ]] || { echo "ERROR: FEAT template not found: $template" >&2; exit 1; }
 
+activation=""
+seed=""
+mask=""
+network=""
+target_network=""
+network_maps=()
+if [[ "$type" == ppi_seed-* || "$type" == nppi-* ]]; then
+    activation="$(l1_output_base "$sub" "$session" "$run" act "$smoothing").feat"
+    [[ -f "$activation/mask.nii.gz" ]] || { echo "ERROR: activation must exist before PPI: $activation" >&2; exit 1; }
+fi
+if [[ "$type" == ppi_seed-* ]]; then
+    seed="${type#ppi_seed-}"
+    mask="${PROJECT_ROOT}/masks/seed-${seed}.nii.gz"
+    [[ -f "$mask" ]] || { echo "ERROR: seed mask not found: $mask" >&2; exit 1; }
+fi
+if [[ "$type" == nppi-* ]]; then
+    network="${type#nppi-}"
+    case "$network" in
+        dmn) target_network=3 ;;
+        ecn) target_network=7 ;;
+        *) echo "ERROR: unsupported network-PPI target: $network" >&2; exit 2 ;;
+    esac
+    for index in $(seq 0 9); do
+        network_map="${NPPI_NETWORK_MAPS_ROOT}/nan_rPNAS_2mm_net000${index}.nii.gz"
+        [[ -f "$network_map" ]] || { echo "ERROR: network map not found: $network_map" >&2; exit 1; }
+        network_maps+=("$network_map")
+    done
+fi
+
 rendered="${subject_output}/L1_sub-${sub}_task-ugr_ses-${session}_model-3_type-${type}_run-${run}.fsf"
 printf 'L1 plan\n  BOLD: %s\n  confounds: %s\n  EV prefix: %s\n  template: %s\n  output: %s.feat\n' \
     "$data" "$confounds" "$ev_prefix" "$template" "$output"
+if [[ "$type" == nppi-* ]]; then
+    printf '  nPPI target: %s (network %d)\n  network maps: %s\n' \
+        "$network" "$target_network" "$NPPI_NETWORK_MAPS_ROOT"
+fi
 [[ "$mode" == dry-run ]] && exit 0
 
 command -v fslnvols >/dev/null 2>&1 || { echo "ERROR: fslnvols is not available; load FSL first." >&2; exit 1; }
@@ -120,19 +155,64 @@ sed_args=(
 )
 
 if [[ "$type" == ppi_seed-* ]]; then
-    seed="${type#ppi_seed-}"
-    mask="${PROJECT_ROOT}/masks/seed-${seed}.nii.gz"
-    [[ -f "$mask" ]] || { echo "ERROR: seed mask not found: $mask" >&2; exit 1; }
-    activation="$(l1_output_base "$sub" "$session" "$run" act "$smoothing").feat"
-    [[ -f "$activation/mask.nii.gz" ]] || { echo "ERROR: activation must exist before PPI: $activation" >&2; exit 1; }
     command -v fslmeants >/dev/null 2>&1 || { echo "ERROR: fslmeants is not available; load FSL first." >&2; exit 1; }
     phys="${subject_output}/ts_task-ugr_ses-${session}_mask-${seed}_run-${run}.txt"
     fslmeants -i "$data" -o "$phys" -m "$mask"
     sed_args+=( -e "s@PHYS@$(sed_escape "$phys")@g" )
 fi
 
+if [[ "$type" == nppi-* ]]; then
+    command -v fslmerge >/dev/null 2>&1 || { echo "ERROR: fslmerge is not available; load FSL first." >&2; exit 1; }
+    command -v fsl_glm >/dev/null 2>&1 || { echo "ERROR: fsl_glm is not available; load FSL first." >&2; exit 1; }
+
+    nppi_tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/ugr-nppi.XXXXXX")"
+    trap 'rm -rf -- "$nppi_tmp_dir"' EXIT
+    network_maps_4d="${nppi_tmp_dir}/networks-10.nii.gz"
+    fslmerge -t "$network_maps_4d" "${network_maps[@]}"
+
+    network_matrix="${subject_output}/ts_task-ugr_ses-${session}_nppi-${network}_networks10_run-${run}.txt"
+    fsl_glm -i "$data" -d "$network_maps_4d" -o "$network_matrix" \
+        --demean -m "$activation/mask.nii.gz"
+    if ! awk -v expected_rows="$nvolumes" '
+        NF != 10 { bad = 1 }
+        {
+            for (column = 1; column <= NF; column++) {
+                if ($column !~ /^[-+]?([0-9]+([.][0-9]*)?|[.][0-9]+)([eE][-+]?[0-9]+)?$/) {
+                    bad = 1
+                }
+            }
+        }
+        END { exit(bad || NR != expected_rows) }
+    ' "$network_matrix"; then
+        echo "ERROR: expected a ${nvolumes}-row by 10-column network time-series matrix: $network_matrix" >&2
+        exit 1
+    fi
+
+    mainnet=""
+    other_networks=()
+    for index in $(seq 0 9); do
+        series="${subject_output}/ts_task-ugr_ses-${session}_nppi-${network}_net-${index}_run-${run}.txt"
+        awk -v column="$((index + 1))" '{ print $column }' "$network_matrix" > "$series"
+        if (( index == target_network )); then
+            mainnet="$series"
+        else
+            other_networks+=("$series")
+        fi
+    done
+    [[ -n "$mainnet" && ${#other_networks[@]} -eq 9 ]] || {
+        echo "ERROR: internal network-PPI target assignment failed." >&2
+        exit 1
+    }
+    sed_args+=( -e "s@MAINNET@$(sed_escape "$mainnet")@g" )
+    for index in $(seq 1 9); do
+        sed_args+=( -e "s@OTHERNET${index}@$(sed_escape "${other_networks[$((index - 1))]}")@g" )
+    done
+    printf '  nPPI target: %s (network %d)\n  simultaneous network matrix: %s\n' \
+        "$network" "$target_network" "$network_matrix"
+fi
+
 sed "${sed_args[@]}" "$template" > "$rendered"
-if grep -En 'OUTPUT|DATA|EVDIR|MISSED_TRIAL|SHAPE_EV|CONFOUNDEVS|NVOLUMES|PHYS' "$rendered" >/dev/null 2>&1; then
+if grep -En 'OUTPUT|DATA|EVDIR|MISSED_TRIAL|SHAPE_EV|CONFOUNDEVS|NVOLUMES|PHYS|MAINNET|OTHERNET[1-9]' "$rendered" >/dev/null 2>&1; then
     echo "ERROR: unresolved placeholder remains in rendered template: $rendered" >&2
     exit 1
 fi

@@ -18,7 +18,7 @@ usage() {
     cat <<'EOF'
 Usage: L2stats.sh SUBJECT TYPE [options]
 
-TYPE is act or ppi_seed-<seed>.
+TYPE is act, ppi_seed-<seed>, or nppi-<dmn|ecn>.
 
 Options:
   --session ID    BIDS session (default: 01)
@@ -49,8 +49,8 @@ session="$(normalize_session "$session")"
 
 case "$type" in
     act) template_type="act"; ncopes=17 ;;
-    ppi_seed-*) template_type="ppi"; ncopes=18 ;;
-    *) echo "ERROR: TYPE must be act or ppi_seed-<seed>." >&2; exit 2 ;;
+    ppi_seed-*|nppi-dmn|nppi-ecn) template_type="ppi"; ncopes=18 ;;
+    *) echo "ERROR: TYPE must be act, ppi_seed-<seed>, or nppi-<dmn|ecn>." >&2; exit 2 ;;
 esac
 
 smoothing=5

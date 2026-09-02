@@ -29,6 +29,10 @@ class WorkflowContractTests(unittest.TestCase):
         self.fsl = self.base / "fsl"
         self.bin = self.base / "bin"
         self.bin.mkdir()
+        self.network_maps = self.base / "network-maps"
+        self.network_maps.mkdir()
+        for index in range(10):
+            (self.network_maps / f"nan_rPNAS_2mm_net000{index}.nii.gz").write_bytes(b"fake")
         (self.bin / "fslnvols").write_text("#!/usr/bin/env bash\necho 100\n", encoding="utf-8")
         (self.bin / "fslmeants").write_text(
             "#!/usr/bin/env bash\n"
@@ -37,7 +41,23 @@ class WorkflowContractTests(unittest.TestCase):
             "printf '0\\n%.0s' {1..100} > \"$out\"\n",
             encoding="utf-8",
         )
-        for command in ("fslnvols", "fslmeants"):
+        (self.bin / "fslmerge").write_text(
+            "#!/usr/bin/env bash\n"
+            "[[ $1 == -t ]] || exit 2\n"
+            "printf fake > \"$2\"\n",
+            encoding="utf-8",
+        )
+        (self.bin / "fsl_glm").write_text(
+            "#!/usr/bin/env bash\n"
+            "out=''\n"
+            "while (($#)); do if [[ $1 == -o ]]; then out=$2; shift 2; else shift; fi; done\n"
+            "awk 'BEGIN { for (row=1; row<=100; row++) { "
+            "for (column=1; column<=10; column++) "
+            "printf \"%s%.6f\", (column == 1 ? \"\" : \" \"), row + column / 100; "
+            "print \"\" } }' > \"$out\"\n",
+            encoding="utf-8",
+        )
+        for command in ("fslnvols", "fslmeants", "fslmerge", "fsl_glm"):
             (self.bin / command).chmod(0o755)
         self.env = os.environ.copy()
         self.env.pop("FSLSUB_PARALLEL", None)
@@ -47,6 +67,7 @@ class WorkflowContractTests(unittest.TestCase):
                 "FMRIPREP_ROOT": str(self.fmriprep),
                 "CONFOUNDS_ROOT": str(self.confounds),
                 "FSL_DERIVATIVES_ROOT": str(self.fsl),
+                "NPPI_NETWORK_MAPS_ROOT": str(self.network_maps),
                 "PATH": f"{self.bin}:{self.env.get('PATH', '')}",
             }
         )
@@ -102,7 +123,7 @@ class WorkflowContractTests(unittest.TestCase):
             self.assertNotIn(placeholder, rendered)
 
         activation = subject_dir / "L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat"
-        activation.mkdir()
+        activation.mkdir(parents=True)
         (activation / "mask.nii.gz").write_bytes(b"fake")
         self.run_script("code/L1stats.sh", "99999", "1", "pTPJ", "--session", "01", "--render-only")
         ppi_fsf = subject_dir / "L1_sub-99999_task-ugr_ses-01_model-3_type-ppi_seed-pTPJ_run-1.fsf"
@@ -111,6 +132,62 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("ts_task-ugr_ses-01_mask-pTPJ_run-1.txt", ppi)
         self.assertIn("set fmri(convolve11) 3", ppi)
         self.assertIn("set fmri(featwatcher_yn) 0", ppi)
+
+    def test_nppi_rendering_uses_simultaneous_network_regression_and_target_mapping(self) -> None:
+        self.prepare_run("1", misses=True)
+        subject_dir = self.fsl / "sub-99999" / "ses-01"
+        activation = subject_dir / "L1_task-ugr_ses-01_model-3_type-act_run-1_sm-5.feat"
+        activation.mkdir(parents=True)
+        (activation / "mask.nii.gz").write_bytes(b"fake")
+
+        for network, target, other_indices in (
+            ("dmn", 3, (0, 1, 2, 4, 5, 6, 7, 8, 9)),
+            ("ecn", 7, (0, 1, 2, 3, 4, 5, 6, 8, 9)),
+        ):
+            result = self.run_script(
+                "code/L1stats.sh", "99999", "1", network, "--session", "01", "--render-only"
+            )
+            self.assertIn(f"nPPI target: {network} (network {target})", result.stdout)
+            rendered_path = (
+                subject_dir
+                / f"L1_sub-99999_task-ugr_ses-01_model-3_type-nppi-{network}_run-1.fsf"
+            )
+            rendered = rendered_path.read_text(encoding="utf-8")
+            self.assertIn("set fmri(evs_orig) 32", rendered)
+            self.assertIn("set fmri(convolve11) 3", rendered)
+            self.assertIn("set fmri(shape11) 3", rendered)
+            self.assertIn(
+                f'set fmri(custom12) "{subject_dir}/ts_task-ugr_ses-01_nppi-{network}_net-{target}_run-1.txt"',
+                rendered,
+            )
+            for ev, index in enumerate(other_indices, start=13):
+                self.assertIn(
+                    f'set fmri(custom{ev}) "{subject_dir}/ts_task-ugr_ses-01_nppi-{network}_net-{index}_run-1.txt"',
+                    rendered,
+                )
+            for placeholder in ("MAINNET", *(f"OTHERNET{i}" for i in range(1, 10))):
+                self.assertNotIn(placeholder, rendered)
+
+            matrix = subject_dir / f"ts_task-ugr_ses-01_nppi-{network}_networks10_run-1.txt"
+            rows = [line.split() for line in matrix.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual(len(rows), 100)
+            self.assertTrue(all(len(row) == 10 for row in rows))
+            for index in range(10):
+                series = subject_dir / f"ts_task-ugr_ses-01_nppi-{network}_net-{index}_run-1.txt"
+                self.assertEqual(len(series.read_text(encoding="utf-8").splitlines()), 100)
+
+    def test_nppi_absent_miss_is_empty_but_retains_task_convolution_setting(self) -> None:
+        self.prepare_run("2", misses=False)
+        subject_dir = self.fsl / "sub-99999" / "ses-01"
+        activation = subject_dir / "L1_task-ugr_ses-01_model-3_type-act_run-2_sm-5.feat"
+        activation.mkdir(parents=True)
+        (activation / "mask.nii.gz").write_bytes(b"fake")
+        self.run_script("code/L1stats.sh", "99999", "2", "dmn", "--session", "01", "--render-only")
+        rendered = (
+            subject_dir / "L1_sub-99999_task-ugr_ses-01_model-3_type-nppi-dmn_run-2.fsf"
+        ).read_text(encoding="utf-8")
+        self.assertIn("set fmri(shape11) 10", rendered)
+        self.assertIn("set fmri(convolve11) 3", rendered)
 
     def test_absent_miss_uses_empty_shape_and_no_stale_file(self) -> None:
         self.prepare_run("2", misses=False)
@@ -162,6 +239,22 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn(f'set feat_files(2) "{expected[1]}"', rendered)
         self.assertNotIn("INPUT1", rendered)
         self.assertNotIn("INPUT2", rendered)
+
+    def test_network_ppi_names_are_exactly_the_l2_inputs(self) -> None:
+        subject_dir = self.fsl / "sub-99999" / "ses-01"
+        expected = []
+        for run in ("1", "2"):
+            feat = subject_dir / f"L1_task-ugr_ses-01_model-3_type-nppi-dmn_run-{run}_sm-5.feat"
+            feat.mkdir(parents=True)
+            (feat / "cluster_mask_zstat1.nii.gz").write_bytes(b"fake")
+            expected.append(feat)
+        result = self.run_script("code/L2stats.sh", "99999", "nppi-dmn", "--session", "01", "--render-only")
+        self.assertIn("fixed effects", result.stdout)
+        rendered = (
+            subject_dir / "L2_sub-99999_task-ugr_ses-01_model-3_type-nppi-dmn.fsf"
+        ).read_text(encoding="utf-8")
+        self.assertIn(f'set feat_files(1) "{expected[0]}"', rendered)
+        self.assertIn(f'set feat_files(2) "{expected[1]}"', rendered)
 
 
 if __name__ == "__main__":

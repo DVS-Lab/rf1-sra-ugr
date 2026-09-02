@@ -14,7 +14,7 @@ Options:
   --manifest FILE   TSV columns: subject, session
   --subject ID      Run one subject/session instead of a manifest
   --session ID      Session for --subject (default: 01)
-  --type TYPE        act or ppi_seed-<seed> (required)
+  --type TYPE        act, ppi_seed-<seed>, or nppi-<dmn|ecn> (required)
   --jobs N          Maximum concurrent FEAT jobs (default: 20)
   --dry-run         Validate and print each L2 plan
   --render-only     Render .fsf files without running FEAT
@@ -46,7 +46,10 @@ while (( $# )); do
         *) echo "ERROR: unknown argument: $1" >&2; usage >&2; exit 2 ;;
     esac
 done
-case "$type" in act|ppi_seed-?*) ;; *) echo "ERROR: --type must be act or ppi_seed-<seed>." >&2; exit 2 ;; esac
+case "$type" in
+    act|ppi_seed-?*|nppi-dmn|nppi-ecn) ;;
+    *) echo "ERROR: --type must be act, ppi_seed-<seed>, or nppi-<dmn|ecn>." >&2; exit 2 ;;
+esac
 [[ "$jobs" =~ ^[1-9][0-9]*$ ]] || { echo "ERROR: --jobs must be positive." >&2; exit 2; }
 [[ -n "$manifest" || -n "$subject" ]] || { echo "ERROR: provide --manifest or --subject." >&2; exit 2; }
 [[ -z "$manifest" || -z "$subject" ]] || { echo "ERROR: --manifest and --subject are mutually exclusive." >&2; exit 2; }
