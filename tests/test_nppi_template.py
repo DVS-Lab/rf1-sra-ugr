@@ -87,6 +87,36 @@ class NetworkPpiTemplateTests(unittest.TestCase):
             self.assertEqual(self.nppi[f"convolve{index}"], "0")
             self.assertEqual(self.nppi[f"custom{index}"], f"OTHERNET{nuisance}")
 
+    def test_brain_derived_time_series_are_never_hrf_convolved(self) -> None:
+        # EVs 1-11 are event/task regressors.  EV 11 is the missed-trial
+        # epoch, not a physiological series, so it retains the double-gamma
+        # HRF when populated.
+        for template in (self.ppi, self.nppi):
+            for index in range(1, 12):
+                self.assertEqual(template[f"convolve{index}"], "3")
+
+        # The seed-PPI physiological EV is sampled from BOLD and therefore
+        # enters exactly as extracted, with no HRF convolution or derivative.
+        self.assertEqual(self.ppi["evtitle12"], "phys")
+        self.assertEqual(self.ppi["shape12"], "2")
+        self.assertEqual(self.ppi["convolve12"], "0")
+        self.assertEqual(self.ppi["tempfilt_yn12"], "0")
+        self.assertEqual(self.ppi["deriv_yn12"], "0")
+        for index in range(13, 24):
+            self.assertEqual(self.ppi[f"shape{index}"], "4")
+            self.assertEqual(self.ppi[f"convolve{index}"], "0")
+
+        # Network-PPI uses ten brain-derived time courses: one target and
+        # nine nuisance networks.  Every one enters unconvolved.
+        for index in range(12, 22):
+            self.assertEqual(self.nppi[f"shape{index}"], "2")
+            self.assertEqual(self.nppi[f"convolve{index}"], "0")
+            self.assertEqual(self.nppi[f"tempfilt_yn{index}"], "0")
+            self.assertEqual(self.nppi[f"deriv_yn{index}"], "0")
+        for index in range(22, 33):
+            self.assertEqual(self.nppi[f"shape{index}"], "4")
+            self.assertEqual(self.nppi[f"convolve{index}"], "0")
+
     def test_interactions_are_task_by_mainnet_with_complete_matrices(self) -> None:
         for psychological_ev, interaction_ev in enumerate(range(22, 33), start=1):
             self.assertEqual(self.nppi[f"shape{interaction_ev}"], "4")

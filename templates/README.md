@@ -88,6 +88,12 @@ PPI interaction construction otherwise follow betrayal. Two betrayal EV titles
 omit a `ppi_` display prefix, but the corresponding interaction definitions and
 contrast positions are unchanged.
 
+EV 11 is therefore not a physiological signal. The extracted seed BOLD series
+is EV 12 (`phys`), with one value per volume (`shape12 = 2`) and no HRF
+convolution (`convolve12 = 0`). All interaction EVs also specify no additional
+convolution; FEAT forms them from the already convolved psychological EV and
+the unconvolved physiological EV.
+
 ## Network PPI
 
 `L1_task-ugr_model-3_type-nppi.fsf` is a reproducible expansion of the
@@ -108,6 +114,11 @@ nine nuisance-network columns are inserted. Contrast 18 estimates `mainnet`.
 The miss EV remains double-gamma convolved when populated and is rendered as
 empty shape 10 when no misses occur. Its interaction remains in the model for
 parity with the established model-3 seed-PPI template.
+
+All ten spatially regressed network time courses—target plus nine nuisance
+networks—are brain-derived signals with one value per volume and
+`convolve = 0`. None is HRF-convolved. The network-PPI interaction EVs likewise
+specify no additional convolution.
 
 `L1stats.sh` estimates all ten network time courses together in one spatial
 regression, rather than fitting ten separate single-network regressions. `dmn`
