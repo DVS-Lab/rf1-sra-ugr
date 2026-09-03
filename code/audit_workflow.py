@@ -366,6 +366,10 @@ def main() -> int:
     discovered_sessions = sorted({unit.session for unit in ordered_units})
     lines = [
         "UGR WORKFLOW AUDIT",
+        f"BIDS root: {args.bids_root.resolve()}",
+        f"fMRIPrep root: {args.fmriprep_root.resolve()}",
+        f"Confounds root: {args.confounds_root.resolve()}",
+        f"FSL derivatives root: {args.fsl_root.resolve()}",
         f"Sessions audited: {','.join(discovered_sessions) if discovered_sessions else 'none'}",
         f"Visible UGR units: {len(ordered_units)}",
         f"Input-ready units: {len(input_ready)}",
@@ -387,6 +391,11 @@ def main() -> int:
         f"L2 {ppi_type} blocked by L1: {paired - ppi_l2_eligible}",
         f"Detailed reports: {out.resolve()}",
     ]
+    if input_ready and ev_complete == 0:
+        lines.insert(
+            5,
+            "WARNING: no EV outputs were found for any input-ready unit; verify the FSL derivatives root.",
+        )
     summary = "\n".join(lines) + "\n"
     out.mkdir(parents=True, exist_ok=True)
     (out / "summary.txt").write_text(summary, encoding="utf-8")

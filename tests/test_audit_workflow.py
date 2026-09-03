@@ -122,6 +122,10 @@ class WorkflowAuditTests(unittest.TestCase):
         )
 
         self.assertIn("Visible UGR units: 3", result.stdout)
+        self.assertIn(f"BIDS root: {self.bids.resolve()}", result.stdout)
+        self.assertIn(f"fMRIPrep root: {self.fmriprep.resolve()}", result.stdout)
+        self.assertIn(f"Confounds root: {self.confounds.resolve()}", result.stdout)
+        self.assertIn(f"FSL derivatives root: {self.fsl.resolve()}", result.stdout)
         self.assertIn("Input-ready units: 2", result.stdout)
         self.assertIn("Input-missing units: 1", result.stdout)
         self.assertIn("EV todo: 0", result.stdout)
@@ -174,6 +178,36 @@ class WorkflowAuditTests(unittest.TestCase):
         self.assertEqual(
             self.read_tsv(output / "L1-nppi-dmn-todo.tsv"),
             [{"subject": "10001", "session": "01", "run": "1"}],
+        )
+
+    def test_audit_warns_when_ready_inputs_have_no_local_derivatives(self) -> None:
+        unit = Unit("10001", "01", "1")
+        self.prepare_inputs(unit)
+        output = self.base / "audit-empty-derivatives"
+        result = subprocess.run(
+            [
+                sys.executable,
+                "code/audit_workflow.py",
+                "--bids-root",
+                str(self.bids),
+                "--fmriprep-root",
+                str(self.fmriprep),
+                "--confounds-root",
+                str(self.confounds),
+                "--fsl-root",
+                str(self.fsl),
+                "--output-dir",
+                str(output),
+            ],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+        self.assertIn(f"FSL derivatives root: {self.fsl.resolve()}", result.stdout)
+        self.assertIn(
+            "WARNING: no EV outputs were found for any input-ready unit; verify the FSL derivatives root.",
+            result.stdout,
         )
 
 

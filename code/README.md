@@ -25,7 +25,7 @@ All active analysis code is model 3, session-aware, and BIDS/derivatives-only.
 - **Typical command:** `python3 code/audit_workflow.py --sessions all --ppi-type nppi-dmn --output-dir logs/audits/current`.
 - **Called by / calls:** Called directly or through `run_logged.sh`; does not invoke FEAT or modify derivatives.
 - **Scientific role:** None; it enforces the existing model-3 workflow contracts and identifies missing work.
-- **Important assumptions:** L2 requires runs 1 and 2; activation has 17 copes and seed/network PPI has 18. `--seed` remains the seed-PPI shorthand; `--ppi-type` selects an exact seed or network family.
+- **Important assumptions:** L2 requires runs 1 and 2; activation has 17 copes and seed/network PPI has 18. `--seed` remains the seed-PPI shorthand; `--ppi-type` selects an exact seed or network family. Every summary prints the resolved input and FSL derivatives roots and warns when input-ready units exist but no EV outputs are found, which commonly indicates a stale cross-project environment variable.
 
 ## `project_config.sh`
 
