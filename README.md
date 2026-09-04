@@ -146,7 +146,12 @@ bash code/run_L2stats.sh \
 `L2stats.sh` defaults `FSLSUB_PARALLEL=1`. This prevents the local `fsl_sub`
 shell backend from creating machine-wide worker pools inside every FEAT job,
 so `run_L2stats.sh --jobs` remains the primary L2 concurrency control. An
-explicitly exported `FSLSUB_PARALLEL` value overrides the default.
+explicitly exported `FSLSUB_PARALLEL` value overrides the default. Because
+FEAT may return while internally submitted fixed-effects jobs are still
+finishing, the worker waits for the complete output contract used by the
+workflow audit before returning success. The default two-hour bound and
+ten-second polling interval can be changed with
+`L2_COMPLETION_TIMEOUT_SECONDS` and `L2_COMPLETION_POLL_SECONDS`.
 
 Use `code/run_logged.sh` around important production commands when a compact,
 Git-trackable run record is desired. Generated imaging data and raw logs remain

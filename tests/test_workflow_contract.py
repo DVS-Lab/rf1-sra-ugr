@@ -256,6 +256,74 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn(f'set feat_files(1) "{expected[0]}"', rendered)
         self.assertIn(f'set feat_files(2) "{expected[1]}"', rendered)
 
+    def test_l2_rejects_partial_existing_output_even_with_final_cope_marker(self) -> None:
+        subject_dir = self.fsl / "sub-99999" / "ses-01"
+        for run in ("1", "2"):
+            feat = subject_dir / f"L1_task-ugr_ses-01_model-3_type-act_run-{run}_sm-5.feat"
+            feat.mkdir(parents=True)
+            (feat / "cluster_mask_zstat1.nii.gz").write_bytes(b"fake")
+
+        partial = subject_dir / "L2_task-ugr_ses-01_model-3_type-act_sm-5.gfeat"
+        final_cope = partial / "cope17.feat"
+        final_cope.mkdir(parents=True)
+        (final_cope / "cluster_mask_zstat1.nii.gz").write_bytes(b"fake")
+
+        result = subprocess.run(
+            ["bash", "code/L2stats.sh", "99999", "act", "--session", "01", "--render-only"],
+            cwd=ROOT,
+            env=self.env,
+            text=True,
+            capture_output=True,
+        )
+
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("incomplete output exists", result.stderr)
+
+    def test_l2_waits_for_asynchronously_completed_feat_output(self) -> None:
+        subject_dir = self.fsl / "sub-99999" / "ses-01"
+        for run in ("1", "2"):
+            feat = subject_dir / f"L1_task-ugr_ses-01_model-3_type-act_run-{run}_sm-5.feat"
+            feat.mkdir(parents=True)
+            (feat / "cluster_mask_zstat1.nii.gz").write_bytes(b"fake")
+
+        fake_feat = self.bin / "feat"
+        fake_feat.write_text(
+            "#!/usr/bin/env bash\n"
+            "output=$(awk -F '\"' '/^set fmri\\(outputdir\\)/ { print $2; exit }' \"$1\")\n"
+            "(\n"
+            "  sleep 1\n"
+            "  gfeat=\"${output}.gfeat\"\n"
+            "  mkdir -p \"$gfeat\"\n"
+            "  printf fake > \"$gfeat/design.mat\"\n"
+            "  printf fake > \"$gfeat/design.con\"\n"
+            "  for cope in $(seq 17); do\n"
+            "    cope_dir=\"$gfeat/cope${cope}.feat\"\n"
+            "    mkdir -p \"$cope_dir/stats\"\n"
+            "    for relative in design.mat design.con mask.nii.gz stats/cope1.nii.gz "
+            "stats/zstat1.nii.gz cluster_mask_zstat1.nii.gz; do\n"
+            "      printf fake > \"$cope_dir/$relative\"\n"
+            "    done\n"
+            "  done\n"
+            ") >/dev/null 2>&1 &\n",
+            encoding="utf-8",
+        )
+        fake_feat.chmod(0o755)
+        env = self.env.copy()
+        env["L2_COMPLETION_TIMEOUT_SECONDS"] = "5"
+        env["L2_COMPLETION_POLL_SECONDS"] = "1"
+
+        result = subprocess.run(
+            ["bash", "code/L2stats.sh", "99999", "act", "--session", "01"],
+            cwd=ROOT,
+            env=env,
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+
+        self.assertIn("Waiting for internally submitted FEAT jobs", result.stdout)
+        self.assertIn("L2 output complete after", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

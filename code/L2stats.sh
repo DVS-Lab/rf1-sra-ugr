@@ -53,6 +53,70 @@ case "$type" in
     *) echo "ERROR: TYPE must be act, ppi_seed-<seed>, or nppi-<dmn|ecn>." >&2; exit 2 ;;
 esac
 
+completion_timeout="${L2_COMPLETION_TIMEOUT_SECONDS:-7200}"
+completion_poll="${L2_COMPLETION_POLL_SECONDS:-10}"
+[[ "$completion_timeout" =~ ^[0-9]+$ ]] || {
+    echo "ERROR: L2_COMPLETION_TIMEOUT_SECONDS must be a nonnegative integer." >&2
+    exit 2
+}
+[[ "$completion_poll" =~ ^[1-9][0-9]*$ ]] || {
+    echo "ERROR: L2_COMPLETION_POLL_SECONDS must be a positive integer." >&2
+    exit 2
+}
+
+l2_output_complete() {
+    local base="$1" cope cope_dir
+    [[ -s "$base/design.mat" && -s "$base/design.con" ]] || return 1
+    for cope in $(seq "$ncopes"); do
+        cope_dir="$base/cope${cope}.feat"
+        [[ -s "$cope_dir/design.mat" ]] || return 1
+        [[ -s "$cope_dir/design.con" ]] || return 1
+        [[ -s "$cope_dir/mask.nii.gz" ]] || return 1
+        [[ -s "$cope_dir/stats/cope1.nii.gz" ]] || return 1
+        [[ -s "$cope_dir/stats/zstat1.nii.gz" ]] || return 1
+        [[ -s "$cope_dir/cluster_mask_zstat1.nii.gz" ]] || return 1
+    done
+}
+
+report_missing_l2_outputs() {
+    local base="$1" cope cope_dir relative
+    for relative in design.mat design.con; do
+        [[ -s "$base/$relative" ]] || printf '  %s\n' "$relative" >&2
+    done
+    for cope in $(seq "$ncopes"); do
+        cope_dir="$base/cope${cope}.feat"
+        for relative in \
+            design.mat design.con mask.nii.gz \
+            stats/cope1.nii.gz stats/zstat1.nii.gz cluster_mask_zstat1.nii.gz
+        do
+            [[ -s "$cope_dir/$relative" ]] || printf '  cope%s.feat/%s\n' "$cope" "$relative" >&2
+        done
+    done
+}
+
+wait_for_l2_completion() {
+    local base="$1" waited=0
+    if l2_output_complete "$base"; then
+        echo "L2 output complete: $base"
+        return 0
+    fi
+
+    echo "Waiting for internally submitted FEAT jobs (timeout ${completion_timeout}s): $base"
+    while (( waited < completion_timeout )); do
+        sleep "$completion_poll"
+        waited=$((waited + completion_poll))
+        if l2_output_complete "$base"; then
+            echo "L2 output complete after ${waited}s: $base"
+            return 0
+        fi
+    done
+
+    echo "ERROR: timed out waiting for complete L2 output after ${waited}s: $base" >&2
+    echo "Missing or empty required files:" >&2
+    report_missing_l2_outputs "$base"
+    return 1
+}
+
 smoothing=5
 input1="$(l1_output_base "$sub" "$session" 1 "$type" "$smoothing").feat"
 input2="$(l1_output_base "$sub" "$session" 2 "$type" "$smoothing").feat"
@@ -73,7 +137,7 @@ printf 'L2 plan (fixed effects across UGR runs 1 + 2)\n  run 1: %s\n  run 2: %s\
 gfeat_dir="${output}.gfeat"
 if [[ -e "$gfeat_dir" ]]; then
     if (( ! overwrite )); then
-        if [[ -f "$gfeat_dir/cope${ncopes}.feat/cluster_mask_zstat1.nii.gz" ]]; then
+        if l2_output_complete "$gfeat_dir"; then
             echo "Complete output already exists; skipping: $gfeat_dir"
             exit 0
         fi
@@ -101,6 +165,7 @@ echo "Rendered: $rendered"
 
 command -v feat >/dev/null 2>&1 || { echo "ERROR: feat is not available; load FSL first." >&2; exit 1; }
 feat "$rendered"
+wait_for_l2_completion "$gfeat_dir"
 for cope in $(seq "$ncopes"); do
     cope_dir="$gfeat_dir/cope${cope}.feat"
     rm -f -- "$cope_dir/stats/res4d.nii.gz" "$cope_dir/stats/corrections.nii.gz" \

@@ -135,7 +135,7 @@ All active analysis code is model 3, session-aware, and BIDS/derivatives-only.
 - **Typical command:** `bash code/L2stats.sh 10317 act --session 01 --dry-run`.
 - **Called by / calls:** Called by `run_L2stats.sh`; calls FEAT.
 - **Scientific role:** Estimates within-subject fixed effects across runs, not across sessions.
-- **Important assumptions:** Activation has 17 copes; seed and network PPI have 18. The worker defaults `FSLSUB_PARALLEL=1` so the batch wrapper's `--jobs` value remains the primary concurrency limit; export another value only when deliberately changing nested FSL parallelism.
+- **Important assumptions:** Activation has 17 copes; seed and network PPI have 18. The worker defaults `FSLSUB_PARALLEL=1` so the batch wrapper's `--jobs` value remains the primary concurrency limit; export another value only when deliberately changing nested FSL parallelism. It verifies the same full GFEAT file contract as `audit_workflow.py` before returning success, waiting up to `L2_COMPLETION_TIMEOUT_SECONDS` (default 7200) and polling every `L2_COMPLETION_POLL_SECONDS` (default 10).
 
 ## `run_L2stats.sh`
 
