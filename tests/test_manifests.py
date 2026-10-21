@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -43,6 +44,39 @@ class ManifestTests(unittest.TestCase):
             / "L1_task-ugr_ses-02_model-3_type-ppi_seed-pTPJ_run-2_sm-5.feat",
         )
         self.assertEqual(normalize_type("nppi-dmn"), "nppi-dmn")
+
+    def test_expected_runs_exist_in_inventory_without_events_or_session(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            ready, missing = build_manifest(["10001"], ["01", "02"], base / "bids", base / "fmriprep", base / "confounds")
+            self.assertEqual(ready, [])
+            self.assertEqual([(r[1], r[2]) for r in missing], [("01", "1"), ("01", "2"), ("02", "1"), ("02", "2")])
+            self.assertTrue(all(r[3] == "events,BOLD,confounds" for r in missing))
+
+    def test_roster_and_exclusions_gate_even_with_residual_files(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            bids, preproc, confounds, excluded = [base / s for s in ("bids", "preproc", "confounds", "excluded")]
+            bids.mkdir()
+            excluded.mkdir()
+            (excluded / "Smith-SRA-10002").mkdir()
+            (bids / "participants.tsv").write_text("participant_id\nsub-10001\nsub-10002\n")
+            for subject in ("10001", "10002", "10003"):
+                for path in paths_for(subject, "01", "1", bids, preproc, confounds):
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text("present\n")
+            command = [sys.executable, str(ROOT / "code/build_L1_manifest.py"),
+                       "--bids-root", str(bids), "--fmriprep-root", str(preproc),
+                       "--confounds-root", str(confounds), "--source-exclusions-root", str(excluded),
+                       "--output", str(base / "ready.tsv"), "--missing-output", str(base / "missing.tsv")]
+            proc = subprocess.run(command, capture_output=True, text=True)
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            self.assertEqual((base / "ready.tsv").read_text(), "subject\tsession\trun\n10001\t01\t1\n")
+            self.assertIn("10001\t01\t2\tevents,BOLD,confounds", (base / "missing.tsv").read_text())
+            before = (base / "ready.tsv").read_bytes()
+            command[command.index("--source-exclusions-root") + 1] = str(base / "unavailable")
+            self.assertNotEqual(subprocess.run(command, capture_output=True).returncode, 0)
+            self.assertEqual((base / "ready.tsv").read_bytes(), before)
 
 
 if __name__ == "__main__":

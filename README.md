@@ -47,6 +47,10 @@ specification.
 
 ## Internal quick start
 
+For the current paper handoff, use [Current Availability Handoff](#current-availability-handoff)
+first. The generic inventory commands below do not apply reviewed run holds;
+substitute the verified handoff manifest before any EV/FEAT execution.
+
 On Linux2:
 
 ```bash
@@ -188,3 +192,20 @@ else
   bash code/validate_workflow.sh
 fi
 ```
+## Current Availability Handoff
+
+For the Katie/Sophia reconciliation, use Linux2's
+`code/refresh_task_handoff.py` and its verified private
+`work/task-handoff-<stamp>/ugr/L1-ready.tsv`, not the historical August snapshot
+or a subject-specific 12018 exception. It preserves reviewed holds (including
+11201 run 1) separately from technical availability and QC review flags.
+Do not freeze a paper sample or launch analyses from raw technical inventories.
+
+`build_L1_manifest.py` now enumerates both expected runs for every requested
+session, even without events/session directories. Its default population is
+`bids/participants.tsv`, not residual `sub-*` folders; an optional sublist must
+be a subset of that roster. The private source-exclusion directory must be
+available and its participants are always omitted. Missing rows are run-specific.
+This builder is a technical presence inventory, not a reviewed eligibility list.
+Use the Linux2 handoff to apply settled run holds before execution. QC thresholds
+and decisions are not recalculated or changed by this builder.

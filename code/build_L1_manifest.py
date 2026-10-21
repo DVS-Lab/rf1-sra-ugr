@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a session/run-aware UGR L1 readiness manifest from visible inputs."""
+"""Inventory expected UGR inputs, not QC or final analysis eligibility."""
 
 from __future__ import annotations
 
@@ -8,9 +8,6 @@ import csv
 import os
 import re
 from pathlib import Path
-
-
-EVENT_RE = re.compile(r"^sub-(?P<subject>[^_]+)_ses-(?P<session>[^_]+)_task-ugr_run-(?P<run>[^_]+)_events\.tsv$")
 
 
 def read_sublist(path: Path) -> list[str]:
@@ -23,7 +20,12 @@ def read_sublist(path: Path) -> list[str]:
 
 
 def discover_subjects(bids_root: Path) -> list[str]:
-    return sorted(path.name.removeprefix("sub-") for path in bids_root.glob("sub-*") if path.is_dir())
+    with (bids_root / "participants.tsv").open(newline="") as handle:
+        rows = csv.DictReader(handle, delimiter="\t")
+        subjects = [row["participant_id"].removeprefix("sub-") for row in rows]
+    if not subjects or len(set(subjects)) != len(subjects) or any(not re.fullmatch(r"\d{5}", s) for s in subjects):
+        raise ValueError("invalid or duplicate MRI roster IDs")
+    return sorted(subjects)
 
 
 def paths_for(
@@ -58,19 +60,8 @@ def build_manifest(
     missing: list[tuple[str, str, str, str]] = []
     for subject in subjects:
         for session in sessions:
-            func_dir = bids_root / f"sub-{subject}" / f"ses-{session}" / "func"
-            if not func_dir.is_dir():
-                missing.append((subject, session, "", "missing BIDS session func directory"))
-                continue
-            runs: list[str] = []
-            for events in sorted(func_dir.glob(f"sub-{subject}_ses-{session}_task-ugr_run-*_events.tsv")):
-                match = EVENT_RE.match(events.name)
-                if match:
-                    runs.append(match.group("run"))
-            if not runs:
-                missing.append((subject, session, "", "no canonical UGR events"))
-                continue
-            for run in sorted(dict.fromkeys(runs), key=lambda value: (not value.isdigit(), int(value) if value.isdigit() else value)):
+            # Enumerate expectations even when no events or session directory exists.
+            for run in ("1", "2"):
                 events, bold, confounds = paths_for(
                     subject, session, run, bids_root, fmriprep_root, confounds_root
                 )
@@ -112,6 +103,8 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument("--sublist", type=Path)
+    parser.add_argument("--source-exclusions-root", type=Path, default=Path(os.environ.get(
+        "SOURCEDATA_EXCLUSIONS_ROOT", "/ZPOOL/data/sourcedata/sourcedata/rf1-sra-exclusions")))
     parser.add_argument("--sessions", default="01")
     parser.add_argument("--output", type=Path, default=root / "logs" / "runlists" / "L1-ready.tsv")
     parser.add_argument(
@@ -123,7 +116,18 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     sessions = [value.removeprefix("ses-").strip() for value in args.sessions.split(",") if value.strip()]
-    subjects = read_sublist(args.sublist) if args.sublist else discover_subjects(args.bids_root)
+    if not sessions or len(set(sessions)) != len(sessions) or any(not re.fullmatch(r"\d{2}", s) for s in sessions):
+        raise ValueError("sessions must be unique two-digit labels")
+    if not args.source_exclusions_root.is_dir():
+        raise ValueError("source-exclusions root unavailable")
+    roster = discover_subjects(args.bids_root)
+    subjects = read_sublist(args.sublist) if args.sublist else roster
+    if not set(subjects) <= set(roster):
+        raise ValueError("requested IDs outside approved MRI roster")
+    excluded = {p.name.removeprefix("Smith-SRA-") for p in args.source_exclusions_root.iterdir()
+                if p.is_dir() and re.fullmatch(r"Smith-SRA-\d{5}", p.name)}
+    skipped = len(set(subjects) & excluded)
+    subjects = [s for s in subjects if s not in excluded]
     ready, missing = build_manifest(
         subjects, sessions, args.bids_root, args.fmriprep_root, args.confounds_root
     )
@@ -131,11 +135,13 @@ def main() -> int:
     write_tsv(args.missing_output, ("subject", "session", "run", "reason"), missing)
     paired = len({(sub, ses) for sub, ses, run in ready if {r for s, se, r in ready if s == sub and se == ses} >= {"1", "2"}})
     print(f"Subjects considered: {len(subjects)}")
+    print(f"Source-excluded subjects skipped: {skipped}")
     print(f"Ready UGR L1 runs: {len(ready)}")
     print(f"Subject-sessions with ready runs 1 and 2: {paired}")
     print(f"Missing-input rows: {len(missing)}")
     print(f"Ready manifest: {args.output.resolve()}")
     print(f"Missing-input report: {args.missing_output.resolve()}")
+    print("Technical inventory only: apply reviewed holds via the Linux2 task handoff before execution; QC is not an exclusion decision.")
     return 0
 
 
