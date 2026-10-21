@@ -9,6 +9,7 @@ BIDS_ROOT="${BIDS_ROOT:-${UPSTREAM_ROOT}/bids}"
 FMRIPREP_ROOT="${FMRIPREP_ROOT:-${UPSTREAM_ROOT}/derivatives/fmriprep}"
 CONFOUNDS_ROOT="${CONFOUNDS_ROOT:-${UPSTREAM_ROOT}/derivatives/fsl/confounds_tedana}"
 FSL_DERIVATIVES_ROOT="${FSL_DERIVATIVES_ROOT:-${PROJECT_ROOT}/derivatives/fsl}"
+EV_FILES_ROOT="${EV_FILES_ROOT:-${FSL_DERIVATIVES_ROOT}/EVfiles}"
 NPPI_NETWORK_MAPS_ROOT="${NPPI_NETWORK_MAPS_ROOT:-${PROJECT_ROOT}/masks}"
 
 normalize_subject() {
@@ -33,8 +34,8 @@ model3_ev_prefix() {
     sub="$(normalize_subject "$1")"
     session="$(normalize_session "$2")"
     run="$3"
-    printf '%s/EVfiles/sub-%s/ses-%s/ugr/model-3/run-%s\n' \
-        "$FSL_DERIVATIVES_ROOT" "$sub" "$session" "$run"
+    printf '%s/sub-%s/ses-%s/ugr/model-3/run-%s\n' \
+        "$EV_FILES_ROOT" "$sub" "$session" "$run"
 }
 
 l1_output_base() {

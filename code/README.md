@@ -177,3 +177,13 @@ scripts and templates, nPPI machinery, manuscript-specific L3 models,
 covariates, behavioral outputs, figures, and generated derivatives. These are
 not part of production. Their classification and source locations are recorded
 in [WORKFLOW_AUDIT.md](WORKFLOW_AUDIT.md) and Git history.
+
+## Isolated nuisance-model variants
+
+`project_config.sh` accepts `EV_FILES_ROOT` independently of
+`FSL_DERIVATIVES_ROOT`. Ordinary calls keep their existing defaults. The Linux2
+`code/run_no_tedana_l1.py` runner uses this to reuse canonical task EVs while
+writing age-55+ ses-01 activation outputs under
+`derivatives/fsl-no-tedana-age55/`, with explicit base-only `--confounds`.
+See Linux2 `docs/no-tedana-age55-l1.md` for the validated launch workflow.
+Existing L2/L3 outputs do not automatically become no-TEDANA analyses.

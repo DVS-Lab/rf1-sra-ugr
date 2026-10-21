@@ -111,6 +111,20 @@ class WorkflowContractTests(unittest.TestCase):
             check=True,
         )
 
+    def test_variant_output_root_can_reuse_canonical_evs(self) -> None:
+        self.prepare_run("1", misses=True)
+        original_evs = self.fsl / "EVfiles"
+        variant = self.base / "fsl-no-tedana-age55"
+        self.env.update(EV_FILES_ROOT=str(original_evs), FSL_DERIVATIVES_ROOT=str(variant))
+        base_only = self.base / "base-only.tsv"
+        base_only.write_text("0\n" * 100)
+        self.run_script("code/L1stats.sh", "99999", "1", "0", "--confounds", str(base_only), "--render-only")
+        rendered = next(variant.rglob("*.fsf")).read_text()
+        self.assertIn(str(original_evs), rendered)
+        self.assertIn(str(base_only), rendered)
+        self.assertNotIn("TedanaPlusConfounds", rendered)
+        self.assertFalse((self.fsl / "sub-99999").exists())
+
     def test_l1_rendering_resolves_all_activation_and_ppi_placeholders(self) -> None:
         self.prepare_run("1", misses=True)
         self.run_script("code/L1stats.sh", "99999", "1", "0", "--session", "01", "--render-only")
