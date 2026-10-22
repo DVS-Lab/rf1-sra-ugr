@@ -1,5 +1,9 @@
 # RF1-SRA Ultimatum Game analysis
 
+**Sophia paper:** use the [canonical validated imaging handoff](https://github.com/DVS-Lab/rf1-sra-linux2/blob/main/docs/paper-handoff/README.md)
+for the age-55+, ses-01 no-TEDANA inputs, starting N, revised exclusion rules,
+and L3 next steps. The generic workflow below is not the paper's selected-input list.
+
 This repository is the authoritative downstream RF1-SRA Ultimatum Game (UGR)
 analysis workflow. The task measures responses to fair and unfair divisions of
 money under social and nonsocial contexts. The active scientific model is UGR
@@ -47,9 +51,10 @@ specification.
 
 ## Internal quick start
 
-For the current paper handoff, use [Current Availability Handoff](#current-availability-handoff)
-first. The generic inventory commands below do not apply reviewed run holds;
-substitute the verified handoff manifest before any EV/FEAT execution.
+For the Sophia paper, use the [canonical validated imaging handoff](https://github.com/DVS-Lab/rf1-sra-linux2/blob/main/docs/paper-handoff/README.md)
+first; its selected inputs are already processed. The generic inventory commands
+below do not apply reviewed run holds. For other EV/FEAT preparation, use
+[Current Availability Handoff](#current-availability-handoff).
 
 On Linux2:
 
